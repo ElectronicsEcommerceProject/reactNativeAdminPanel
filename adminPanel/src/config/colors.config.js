@@ -1,1 +1,0 @@
-// Color palette - PRIMARY: '#007AFF', SUCCESS: '#28A745'
