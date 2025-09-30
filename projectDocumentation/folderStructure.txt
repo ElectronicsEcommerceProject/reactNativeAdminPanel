@@ -1,140 +1,140 @@
 ecommerce-admin-panel/
 │
-├── android/
-├── ios/
-├── node_modules/
+├── android/ // Android build files - React Native automatically generates
+├── ios/ // iOS build files - React Native automatically generates  
+├── node_modules/ // Dependencies install hote hain yahan
 │
-├── .env
-├── .eslintrc.js
-├── .prettierrc
-├── app.json
-├── babel.config.js
-├── index.js
-├── metro.config.js
-└── package.json
+├── .env // Environment variables - API_URL=https://api.mystore.com, JWT_SECRET=xyz123
+├── .eslintrc.js // Code quality rules - semicolon, quotes, spacing ke rules
+├── .prettierrc // Code formatting - tab size, line length, bracket spacing
+├── app.json // App metadata - name: "Electronics Admin", version: "1.0.0"
+├── babel.config.js // JavaScript transpiler config - ES6 to ES5 conversion
+├── index.js // React Native entry point - AppRegistry.registerComponent('App', () => App)
+├── metro.config.js // Bundler configuration - asset extensions, transformer options
+└── package.json // Dependencies list - react-native, redux, axios versions
 │
 └── src/  // Aapke app ka saara main code is folder ke andar rehta hai.
     │
-    ├── App.src.jsx // YEH AAPKE APP KA ENTRY POINT HAI.
+    ├── App.src.jsx // MAIN APP COMPONENT - Navigation setup, Redux Provider, Theme Provider
     │
     ├── api/ // Backend server se communicate karne ka saara logic.
-    │   ├── axiosConfig.api.js
-    │   ├── auth.api.js
-    │   ├── banner.api.js
-    │   ├── category.api.js
-    │   ├── coupon.api.js
-    │   ├── notification.api.js
-    │   ├── order.api.js
-    │   ├── product.api.js
-    │   └── user.api.js
+    │   ├── axiosConfig.api.js // Base URL, headers, interceptors - baseURL: 'https://api.electronics.com'
+    │   ├── auth.api.js // login(), logout(), refreshToken() - POST /auth/login
+    │   ├── banner.api.js // getBanners(), createBanner(), deleteBanner() - home page banners
+    │   ├── category.api.js // getCategories(), addCategory() - Mobiles, Laptops, TVs
+    │   ├── coupon.api.js // getCoupons(), createCoupon() - SAVE20, ELECTRONICS50
+    │   ├── notification.api.js // sendNotification(), getNotifications() - push notifications
+    │   ├── order.api.js // getOrders(), updateOrderStatus() - pending, shipped, delivered
+    │   ├── product.api.js // getProducts(), addProduct(), updateProduct() - iPhone, Samsung TV
+    │   └── user.api.js // getUsers(), blockUser(), getUserDetails() - customer management
     │
-    ├── assets/ // Images, fonts, icons.
-    │   ├── fonts/
-    │   ├── icons/
-    │   └── images/
+    ├── assets/ // Static files - images, fonts, icons.
+    │   ├── fonts/ // Roboto-Regular.ttf, Poppins-Bold.ttf - custom fonts
+    │   ├── icons/ // home.png, product.png, order.png - navigation icons
+    │   └── images/ // logo.png, placeholder.jpg, banner-default.jpg
     │
-    ├── components/ // Poore app mein use hone wale common components.
+    ├── components/ // Reusable UI components - har screen mein use hote hain.
     │   ├── common/
-    │   │   ├── AppButton.common.jsx
-    │   │   ├── AppInput.common.jsx
-    │   │   └── AppLoader.common.jsx
+    │   │   ├── AppButton.common.jsx // Custom button - primary, secondary, danger styles
+    │   │   ├── AppInput.common.jsx // Text input - email, password, search fields
+    │   │   └── AppLoader.common.jsx // Loading spinner - API calls ke time dikhta hai
     │   └── layout/
-    │       ├── Header.layout.jsx
-    │       └── ScreenWrapper.layout.jsx
+    │       ├── Header.layout.jsx // Top bar - title, back button, menu icon
+    │       └── ScreenWrapper.layout.jsx // Screen container - padding, safe area, background
     │
-    ├── config/ // App ki configuration files.
-    │   ├── colors.config.js
-    │   ├── constants.config.js
-    │   └── typography.config.js
+    ├── config/ // App ki global settings aur constants.
+    │   ├── colors.config.js // Color palette - PRIMARY: '#007AFF', SUCCESS: '#28A745'
+    │   ├── constants.config.js // App constants - API_TIMEOUT: 10000, PAGE_SIZE: 20
+    │   └── typography.config.js // Font sizes - HEADING: 24, BODY: 16, CAPTION: 12
     │
-    ├── features/ // <<< YEH AAPKE APP KA CORE HAI. Har feature ek "mini-app" hai.
+    ├── features/ // <<< APP KA MAIN LOGIC - Har feature independent module hai.
     │   │
-    │   ├── auth/ // Authentication ka logic.
+    │   ├── auth/ // Login/Logout functionality.
     │   │   └── screens/
-    │   │       ├── login.screens.jsx
-    │   │       └── login.styles.screens.js
+    │   │       ├── login.screens.jsx // Email/password form, validation, API call
+    │   │       └── login.styles.screens.js // Login screen ki styling - form, buttons
     │   │
-    │   ├── dashboard/ // Login ke baad dikhne wali main screen.
+    │   ├── dashboard/ // Admin panel ka home screen - overview dikhata hai.
     │   │   ├── screens/
-    │   │   │   ├── dashboard.screens.jsx
-    │   │   │   └── dashboard.styles.screens.js
+    │   │   │   ├── dashboard.screens.jsx // Stats cards, charts, recent orders
+    │   │   │   └── dashboard.styles.screens.js // Dashboard layout styling
     │   │   └── components/
-    │   │       ├── StatCard.components.jsx
-    │   │       └── SalesChart.components.jsx
+    │   │       ├── StatCard.components.jsx // Total Orders: 1,234, Revenue: ₹50,000
+    │   │       └── SalesChart.components.jsx // Monthly sales graph, daily orders chart
     │   │
-    │   ├── products/ // Products ko manage karne ka logic.
+    │   ├── products/ // Electronics products management - mobiles, laptops, TVs.
     │   │   ├── screens/
-    │   │   │   ├── productList.screens.jsx
-    │   │   │   └── addEditProduct.screens.jsx
+    │   │   │   ├── productList.screens.jsx // All products list, search, filter by category
+    │   │   │   └── addEditProduct.screens.jsx // Add iPhone 15, edit Samsung TV price
     │   │   └── components/
-    │   │       └── productCard.components.jsx
+    │   │       └── productCard.components.jsx // Product tile - image, name, price, stock
     │   │
-    │   ├── orders/ // Orders ko manage karne ka logic.
+    │   ├── orders/ // Customer orders management - pending to delivered.
     │   │   ├── screens/
-    │   │   │   ├── orderList.screens.jsx
-    │   │   │   └── orderDetail.screens.jsx
+    │   │   │   ├── orderList.screens.jsx // All orders, filter by status, date range
+    │   │   │   └── orderDetail.screens.jsx // Order #12345 details, customer info, items
     │   │   └── components/
-    │   │       ├── orderCard.components.jsx
-    │   │       └── orderStatusChip.components.jsx
+    │   │       ├── orderCard.components.jsx // Order summary - ID, customer, total, status
+    │   │       └── orderStatusChip.components.jsx // Pending (orange), Shipped (blue), Delivered (green)
     │   │
-    │   ├── users/ // Users ko manage karne ka logic.
+    │   ├── users/ // Customer management - view, block, unblock users.
     │   │   ├── screens/
-    │   │   │   ├── userList.screens.jsx
-    │   │   │   └── userDetail.screens.jsx
+    │   │   │   ├── userList.screens.jsx // All customers, search by name/email
+    │   │   │   └── userDetail.screens.jsx // Customer profile, order history, block option
     │   │   └── components/
-    │   │       └── userCard.components.jsx
+    │   │       └── userCard.components.jsx // User tile - avatar, name, email, join date
     │   │
-    │   ├── categories/ // Categories ko manage karne ka logic.
+    │   ├── categories/ // Product categories - Mobiles, Laptops, TVs, Accessories.
     │   │   ├── screens/
-    │   │   │   ├── categoryList.screens.jsx
-    │   │   │   └── addEditCategory.screens.jsx
+    │   │   │   ├── categoryList.screens.jsx // All categories, add new, edit existing
+    │   │   │   └── addEditCategory.screens.jsx // Create 'Smart Watches' category with icon
     │   │   └── components/
-    │   │       └── categoryCard.components.jsx
+    │   │       └── categoryCard.components.jsx // Category tile - icon, name, product count
     │   │
-    │   ├── banners/ // Banners ko manage karne ka logic.
+    │   ├── banners/ // Home screen banners - sale announcements, featured products.
     │   │   ├── screens/
-    │   │   │   ├── bannerList.screens.jsx
-    │   │   │   └── addEditBanner.screens.jsx
+    │   │   │   ├── bannerList.screens.jsx // Active banners, create new, delete old
+    │   │   │   └── addEditBanner.screens.jsx // Upload image, set link, schedule dates
     │   │   └── components/
-    │   │       └── bannerCard.components.jsx
+    │   │       └── bannerCard.components.jsx // Banner preview - image, title, active status
     │   │
-    │   ├── coupons/ // Coupons ko manage karne ka logic.
+    │   ├── coupons/ // Discount coupons - SAVE20, ELECTRONICS50, NEWUSER.
     │   │   ├── screens/
-    │   │   │   ├── couponList.screens.jsx
-    │   │   │   └── addEditCoupon.screens.jsx
+    │   │   │   ├── couponList.screens.jsx // All coupons, active/expired, usage stats
+    │   │   │   └── addEditCoupon.screens.jsx // Create 'DIWALI30' - 30% off, min ₹5000
     │   │   └── components/
-    │   │       └── couponCard.components.jsx
+    │   │       └── couponCard.components.jsx // Coupon tile - code, discount, expiry, usage
     │   │
-    │   └── settings/ // App ki settings.
+    │   └── settings/ // App configuration - profile, notifications, logout.
     │       └── screens/
-    │           └── settings.screens.jsx
+    │           └── settings.screens.jsx // Admin profile, change password, app version
     │
-    ├── hooks/ // Custom React hooks.
-    │   ├── useApi.hooks.js
-    │   └── useDebounce.hooks.js
+    ├── hooks/ // Reusable logic - API calls, form handling.
+    │   ├── useApi.hooks.js // API state management - loading, data, error handling
+    │   └── useDebounce.hooks.js // Search optimization - wait 500ms before API call
     │
-    ├── navigation/ // App ki screen navigation.
-    │   ├── AppNavigator.navigation.jsx
-    │   ├── AuthStack.navigation.jsx
-    │   └── MainDrawer.navigation.jsx
+    ├── navigation/ // Screen routing - login flow, main app navigation.
+    │   ├── AppNavigator.navigation.jsx // Root navigator - auth check, route to login/main
+    │   ├── AuthStack.navigation.jsx // Login screens - login, forgot password
+    │   └── MainDrawer.navigation.jsx // Sidebar menu - Dashboard, Products, Orders, Users
     │
-    ├── services/ // Background services.
-    │   ├── analytics.services.js
-    │   └── storage.services.js
+    ├── services/ // Background tasks - analytics, local storage.
+    │   ├── analytics.services.js // Track events - 'product_added', 'order_updated'
+    │   └── storage.services.js // AsyncStorage wrapper - save token, user preferences
     │
-    ├── store/ // Redux global state management.
-    │   ├── store.store.js
-    │   └── features/ // Redux slices for each feature.
-    │       ├── auth.slice.features.js
-    │       ├── product.slice.features.js
-    │       ├── order.slice.features.js
-    │       └── user.slice.features.js
+    ├── store/ // Global state management - user data, app state.
+    │   ├── store.store.js // Redux store configuration - middleware, devtools
+    │   └── features/ // State slices - each feature ka apna state.
+    │       ├── auth.slice.features.js // Login state - user, token, isAuthenticated
+    │       ├── product.slice.features.js // Products list, selected product, loading
+    │       ├── order.slice.features.js // Orders list, order details, status updates
+    │       └── user.slice.features.js // Users list, selected user, block/unblock
     │
-    ├── types/ // (Naya Folder) TypeScript/PropTypes definitions.
-    │   ├── index.types.d.ts
-    │   ├── product.types.js
-    │   └── order.types.js
+    ├── types/ // Data structure definitions - API response types.
+    │   ├── index.types.d.ts // Common types - User, ApiResponse, NavigationProps
+    │   ├── product.types.js // Product shape - id, name, price, category, stock
+    │   └── order.types.js // Order shape - id, userId, items[], total, status
     │
-    └── utils/ // Helper functions.
-        ├── formatters.utils.js
-        └── validators.utils.js
+    └── utils/ // Helper functions - formatting, validation.
+        ├── formatters.utils.js // formatPrice(1234) → '₹1,234', formatDate()
+        └── validators.utils.js // validateEmail(), validatePhone(), validateRequired()
