@@ -1,8 +1,0 @@
-{
-    "name": "react-native-admin-panel",
-    "version": "1.0.0",
-    "private": true,
-    "devDependencies": {
-        "@react-native-community/cli": "latest"
-    }
-}
