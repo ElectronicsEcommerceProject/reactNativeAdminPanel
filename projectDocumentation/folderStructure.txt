@@ -34,13 +34,27 @@ ecommerce-admin-panel/
     │   └── images/ // logo.png, placeholder.jpg, banner-default.jpg
     │
     ├── components/ // Reusable UI components - har screen mein use hote hain.
-    │   ├── common/
-    │   │   ├── AppButton.common.jsx // Custom button - primary, secondary, danger styles
-    │   │   ├── AppInput.common.jsx // Text input - email, password, search fields
-    │   │   └── AppLoader.common.jsx // Loading spinner - API calls ke time dikhta hai
-    │   └── layout/
-    │       ├── Header.layout.jsx // Top bar - title, back button, menu icon
-    │       └── ScreenWrapper.layout.jsx // Screen container - padding, safe area, background
+    │   ├── common/ // Basic UI elements jo har jagah use hote hain
+    │   │   ├── AppButton.common.jsx // Custom button banane ka logic - different styles, colors, sizes
+    │   │   │   // Isme button ka design, press effects, loading state ka logic hoga
+    │   │   │   // Primary, secondary, danger button types ka styling logic
+    │   │   │
+    │   │   ├── AppInput.common.jsx // Text input field ka logic - validation, error handling
+    │   │   │   // Input field ka design, placeholder, validation messages ka logic
+    │   │   │   // Email validation, password visibility toggle ka logic
+    │   │   │
+    │   │   └── AppLoader.common.jsx // Loading spinner dikhane ka logic
+    │   │       // Spinner animation, overlay background, loading text ka logic
+    │   │       // API call ke time loading state manage karne ka logic
+    │   │
+    │   └── layout/ // Screen structure components - har screen ka basic layout
+    │       ├── Header.layout.jsx // Top navigation bar ka logic
+    │       │   // Header title, back button, menu button ka logic
+    │       │   // Navigation actions, header styling ka logic
+    │       │
+    │       └── ScreenWrapper.layout.jsx // Screen container wrapper ka logic
+    │           // SafeArea handling, padding, background color ka logic
+    │           // Keyboard avoiding, scroll behavior ka logic
     │
     ├── config/ // App ki global settings aur constants.
     │   ├── colors.config.js // Color palette - PRIMARY: '#007AFF', SUCCESS: '#28A745'
@@ -58,9 +72,14 @@ ecommerce-admin-panel/
     │   │   ├── screens/
     │   │   │   ├── dashboard.screens.jsx // Stats cards, charts, recent orders
     │   │   │   └── dashboard.styles.screens.js // Dashboard layout styling
-    │   │   └── components/
-    │   │       ├── StatCard.components.jsx // Total Orders: 1,234, Revenue: ₹50,000
-    │   │       └── SalesChart.components.jsx // Monthly sales graph, daily orders chart
+    │   │   └── components/ // Dashboard specific components
+    │   │       ├── StatCard.components.jsx // Statistics card banane ka logic
+    │   │       │   // Card design, icon display, number formatting ka logic
+    │   │       │   // Different colors, animations, click actions ka logic
+    │   │       │
+    │   │       └── SalesChart.components.jsx // Sales chart banane ka logic
+    │   │           // Chart library integration, data processing ka logic
+    │   │           // Line/bar chart rendering, axis labels ka logic
     │   │
     │   ├── products/ // Electronics products management - mobiles, laptops, TVs.
     │   │   ├── screens/
@@ -109,18 +128,47 @@ ecommerce-admin-panel/
     │       └── screens/
     │           └── settings.screens.jsx // Admin profile, change password, app version
     │
-    ├── hooks/ // Reusable logic - API calls, form handling.
-    │   ├── useApi.hooks.js // API state management - loading, data, error handling
-    │   └── useDebounce.hooks.js // Search optimization - wait 500ms before API call
+    ├── hooks/ // Custom React hooks - reusable logic across components.
+    │   ├── useApi.hooks.js // API call management ka logic
+    │   │   // API call karne, loading state manage karne ka logic
+    │   │   // Error handling, retry mechanism, data caching ka logic
+    │   │   // Success/failure states handle karne ka logic
+    │   │
+    │   └── useDebounce.hooks.js // Search input optimization ka logic
+    │       // User typing ke baad delay karne ka logic
+    │       // Unnecessary API calls rokne ka logic, performance optimization optimization
+    │       // Usage: const debouncedSearch = useDebounce(searchText, 500)
+    │       // Waits 500ms after user stops typing before triggering search
+    │       // Prevents API call on every keystroke in search box
+    │       // Used in: Product search, User search, Order search
     │
-    ├── navigation/ // Screen routing - login flow, main app navigation.
-    │   ├── AppNavigator.navigation.jsx // Root navigator - auth check, route to login/main
-    │   ├── AuthStack.navigation.jsx // Login screens - login, forgot password
-    │   └── MainDrawer.navigation.jsx // Sidebar menu - Dashboard, Products, Orders, Users
+    ├── navigation/ // App navigation structure - screen routing system.
+    │   ├── AppNavigator.navigation.jsx // Main navigation controller
+    │   │   // Checks: if user logged in → MainDrawer, else → AuthStack
+    │   │   // Contains: authentication logic, initial route decision
+    │   │   // Flow: App starts → check token → redirect accordingly
+    │   │
+    │   ├── AuthStack.navigation.jsx // Authentication screens navigation
+    │   │   // Screens: Login, Forgot Password, Reset Password
+    │   │   // Stack navigation: Login → Forgot Password → Reset Password
+    │   │   // No drawer/tabs here, simple stack navigation
+    │   │   // After login success → navigate to MainDrawer
+    │   │
+    │   └── MainDrawer.navigation.jsx // Main app navigation (sidebar menu)
+    │       // Drawer items: Dashboard, Products, Orders, Users, Categories, Settings
+    │       // Each item opens respective screen stack
+    │       // Hamburger menu icon opens drawer, user can navigate between sections
+    │       // Contains: user profile in header, logout option
     │
-    ├── services/ // Background tasks - analytics, local storage.
-    │   ├── analytics.services.js // Track events - 'product_added', 'order_updated'
-    │   └── storage.services.js // AsyncStorage wrapper - save token, user preferences
+    ├── services/ // Background services - data persistence, tracking.
+    │   ├── analytics.services.js // User actions track karne ka logic
+    │   │   // Events capture karne, analytics server pe send karne ka logic
+    │   │   // User behavior data collect karne ka logic
+    │   │
+    │   └── storage.services.js // Local storage manage karne ka logic
+    │       // Login token save/retrieve karne ka logic
+    │       // User preferences, app settings store karne ka logic
+    │       // Data encryption/decryption ka logic
     │
     ├── store/ // Global state management - user data, app state.
     │   ├── store.store.js // Redux store configuration - middleware, devtools
