@@ -1,1 +1,0 @@
-// MAIN APP COMPONENT - Navigation setup, Redux Provider, Theme Provider
