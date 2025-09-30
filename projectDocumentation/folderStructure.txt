@@ -14,103 +14,127 @@ ecommerce-admin-panel/
 └── package.json
 │
 └── src/  // Aapke app ka saara main code is folder ke andar rehta hai.
-    │
-    ├── App.jsx // YEH AAPKE APP KA ENTRY POINT HAI. Yeh file Redux store, Navigation aur doosre global providers ko setup karti hai.
-    │
-    ├── api/ // Backend server se communicate karne ka saara logic yahan hota hai.
-    │   ├── axiosConfig.js // Axios (API call karne wali library) ki global settings. Jaise base URL, headers, aur interceptors (token add karna, error handle karna).
-    │   ├── authApi.js // Authentication se related saare API functions (e.g., login, logout).
-    │   ├── bannerApi.js // Banners (promotional images) ko fetch, create, delete karne wale API functions.
-    │   ├── categoryApi.js // Product categories se related saare API functions.
-    │   ├── couponApi.js // Discount coupons se related saare API functions.
-    │   ├── notificationApi.js // Push notifications bhejne/manage karne wale API functions.
-    │   ├── orderApi.js // Orders se related saare API functions (e.g., fetch all orders, update order status).
-    │   ├── productApi.js // Products se related saare API functions (e.g., get all products, add new product).
-    │   └── userApi.js // App users ko manage karne wale API functions (e.g., fetch all users, block user).
-    │
-    ├── assets/ // App mein use hone wali saari static files jaise images, fonts, icons.
-    │   ├── fonts/ // Custom fonts (e.g., .ttf, .otf files) yahan rakhein.
-    │   ├── icons/ // App ke icons (e.g., .svg, .png files) jaise menu icon, delete icon.
-    │   └── images/ // App ke images jaise logo, placeholder images.
-    │
-    ├── components/ // Aise UI components jo poore app mein baar-baar use hote hain.
-    │   ├── common/ // Bahut hi basic, general purpose components.
-    │   │   ├── AppButton/ // Aapka custom button jo poore app mein ek jaisa dikhega.
-    │   │   ├── AppInput/ // Aapka custom text input field jo validation aur styles ke saath aata hai.
-    │   │   └── AppLoader/ // Loading indicator (spinner) jo data fetch hote time dikhega.
-    │   └── layout/ // App ke layout ya screen structure ko define karne wale components.
-    │       ├── Header/ // Har screen ke upar dikhne wala common header.
-    │       └── ScreenWrapper.jsx // Ek wrapper jo har screen ko same padding aur background color deta hai.
-    │
-    ├── config/ // Poore app ki configuration files jo change nahi hoti.
-    │   ├── colors.js // App ke saare colors ek jagah define hote hain (e.g., PRIMARY_COLOR: '#ff0000').
-    │   ├── constants.js // App ke constants jaise API keys ya fixed values.
-    │   └── typography.js // App ke font styles (e.g., H1, H2, Body text) ki settings.
-    │
-    ├── features/ // <<< YEH AAPKE APP KA CORE HAI. Har feature ek chhota "mini-app" hai.
-    │   │
-    │   ├── auth/ // Login/Signup/Logout se related saara logic is folder mein rehta hai.
-    │   │   ├── screens/ // Is feature ki screens (pages).
-    │   │   │   ├── LoginScreen.jsx // Login page ka UI aur logic.
-    │   │   │   └── LoginScreen.styles.js // LoginScreen ke saare styles.
-    │   │
-    │   ├── dashboard/ // Login ke baad dikhne wali main screen.
-    │   │   ├── screens/ // Dashboard ki screen.
-    │   │   │   ├── DashboardScreen.jsx // Dashboard ka UI aur logic (e.g., stats dikhana).
-    │   │   │   └── DashboardScreen.styles.js // DashboardScreen ke styles.
-    │   │   └── components/ // Sirf dashboard mein use hone wale special components.
-    │   │       ├── StatCard.jsx // Chhota card jo stats dikhata hai (e.g., Total Sales).
-    │   │       └── SalesChart.jsx // Sales ka graph ya chart dikhane wala component.
-    │   │
-    │   ├── products/ // Products ko manage karne ka saara logic.
-    │   │   ├── screens/ // Products ki screens.
-    │   │   │   ├── ProductListScreen.jsx // Saare products ki list dikhane wali screen.
-    │   │   │   ├── AddEditProductScreen.jsx // Naya product add karne ya purane ko edit karne wali screen.
-    │   │   └── components/ // Sirf products feature mein use hone wale components.
-    │   │       └── ProductCard.jsx // List mein ek single product ko dikhane wala card.
-    │   │
-    │   ├── orders/ // Saare orders ko manage karne ka logic.
-    │   │   ├── screens/ // Orders ki screens.
-    │   │   │   ├── OrderListScreen.jsx // Saare orders ki list dikhane wali screen.
-    │   │   │   └── OrderDetailScreen.jsx // Ek particular order ki saari details dikhane wali screen.
-    │   │   └── components/ // Sirf orders feature mein use hone wale components.
-    │   │       ├── OrderCard.jsx // List mein ek single order ko dikhane wala card.
-    │   │       └── OrderStatusChip.jsx // Order ka status (e.g., Pending, Delivered) dikhane wala chhota component.
-    │   │
-    │   ├── users/ // App ke users ko manage karne ka logic.
-    │   │   ├── screens/ // Users ki screens.
-    │   │   │   ├── UserListScreen.jsx // Saare users ki list.
-    │   │   │   └── UserDetailScreen.jsx // Ek user ki details.
-    │   │   └── components/
-    │   │       └── UserCard.jsx // List mein ek single user ko dikhane wala card.
-    │   │
-    │   ├── (categories, banners, coupons...) // Yeh sabhi features upar diye gaye pattern ko hi follow karenge (screens, components).
-    │   │
-    │   └── settings/ // App ki settings (e.g., change password, logout).
-    │       └── screens/
-    │           └── SettingsScreen.jsx // Settings page ka UI aur logic.
-    │
-    ├── hooks/ // Reusable logic jo stateful ho (custom React hooks).
-    │   ├── useApi.js // API call karne ke process ko aasan banane wala hook. Yeh loading, error, aur data state ko automatically manage karta hai.
-    │   └── useDebounce.js // Search functionality ke liye. Yeh API call ko tab tak rokta hai jab tak user type karna band na kar de.
-    │
-    ├── navigation/ // App ki saari screen navigation (ek screen se doosri par jaana).
-    │   ├── AppNavigator.jsx // Main navigator. Yeh check karta hai ki user logged-in hai ya nahi aur uske hisaab se AuthStack ya MainDrawer dikhata hai.
-    │   ├── AuthStack.jsx // Login se pehle ki screens ka group (e.g., LoginScreen).
-    │   └── MainDrawer.jsx // Login ke baad dikhne wala main navigation (e.g., side menu/drawer).
-    │
-    ├── services/ // Aisa logic jo UI se direct related nahi hai.
-    │   ├── analyticsService.js // Analytics events (e.g., user ne kaunsa button click kiya) track karne wale functions.
-    │   └── storageService.js // Phone ki local storage (AsyncStorage) mein data save/read karne ke helper functions.
-    │
-    ├── store/ // Redux (Global State Management) ka saara logic.
-    │   ├── store.js // Redux store ko setup aur configure karne wali file.
-    │   ├── rootReducer.js // Saare alag-alag slices ko ek main reducer mein combine karne wali file.
-    │   └── slices/ // Global state ka har hissa ek "slice" hota hai.
-    │       ├── authSlice.js // User ke login status, token, aur user info ko manage karta hai.
-    │       ├── productSlice.js // Saare products ki list, loading status, etc., ko manage karta hai.
-    │       └── (orderSlice, userSlice...) // Har feature ka apna slice jo uske global data ko manage karta hai.
-    │
-    └── utils/ // General helper functions jo poore app mein kahin bhi use ho sakte hain.
-        ├── formatters.js // Data ko display ke liye format karne wale functions (e.g., date ko 'DD-MM-YYYY' mein badalna, currency format karna).
-        └── validators.js // Simple data validation functions (e.g., check karna ki email valid hai ya nahi).
+    │
+    ├── App.src.jsx // YEH AAPKE APP KA ENTRY POINT HAI.
+    │
+    ├── api/ // Backend server se communicate karne ka saara logic.
+    │   ├── axiosConfig.api.js
+    │   ├── auth.api.js
+    │   ├── banner.api.js
+    │   ├── category.api.js
+    │   ├── coupon.api.js
+    │   ├── notification.api.js
+    │   ├── order.api.js
+    │   ├── product.api.js
+    │   └── user.api.js
+    │
+    ├── assets/ // Images, fonts, icons.
+    │   ├── fonts/
+    │   ├── icons/
+    │   └── images/
+    │
+    ├── components/ // Poore app mein use hone wale common components.
+    │   ├── common/
+    │   │   ├── AppButton.common.jsx
+    │   │   ├── AppInput.common.jsx
+    │   │   └── AppLoader.common.jsx
+    │   └── layout/
+    │       ├── Header.layout.jsx
+    │       └── ScreenWrapper.layout.jsx
+    │
+    ├── config/ // App ki configuration files.
+    │   ├── colors.config.js
+    │   ├── constants.config.js
+    │   └── typography.config.js
+    │
+    ├── features/ // <<< YEH AAPKE APP KA CORE HAI. Har feature ek "mini-app" hai.
+    │   │
+    │   ├── auth/ // Authentication ka logic.
+    │   │   └── screens/
+    │   │       ├── login.screens.jsx
+    │   │       └── login.styles.screens.js
+    │   │
+    │   ├── dashboard/ // Login ke baad dikhne wali main screen.
+    │   │   ├── screens/
+    │   │   │   ├── dashboard.screens.jsx
+    │   │   │   └── dashboard.styles.screens.js
+    │   │   └── components/
+    │   │       ├── StatCard.components.jsx
+    │   │       └── SalesChart.components.jsx
+    │   │
+    │   ├── products/ // Products ko manage karne ka logic.
+    │   │   ├── screens/
+    │   │   │   ├── productList.screens.jsx
+    │   │   │   └── addEditProduct.screens.jsx
+    │   │   └── components/
+    │   │       └── productCard.components.jsx
+    │   │
+    │   ├── orders/ // Orders ko manage karne ka logic.
+    │   │   ├── screens/
+    │   │   │   ├── orderList.screens.jsx
+    │   │   │   └── orderDetail.screens.jsx
+    │   │   └── components/
+    │   │       ├── orderCard.components.jsx
+    │   │       └── orderStatusChip.components.jsx
+    │   │
+    │   ├── users/ // Users ko manage karne ka logic.
+    │   │   ├── screens/
+    │   │   │   ├── userList.screens.jsx
+    │   │   │   └── userDetail.screens.jsx
+    │   │   └── components/
+    │   │       └── userCard.components.jsx
+    │   │
+    │   ├── categories/ // Categories ko manage karne ka logic.
+    │   │   ├── screens/
+    │   │   │   ├── categoryList.screens.jsx
+    │   │   │   └── addEditCategory.screens.jsx
+    │   │   └── components/
+    │   │       └── categoryCard.components.jsx
+    │   │
+    │   ├── banners/ // Banners ko manage karne ka logic.
+    │   │   ├── screens/
+    │   │   │   ├── bannerList.screens.jsx
+    │   │   │   └── addEditBanner.screens.jsx
+    │   │   └── components/
+    │   │       └── bannerCard.components.jsx
+    │   │
+    │   ├── coupons/ // Coupons ko manage karne ka logic.
+    │   │   ├── screens/
+    │   │   │   ├── couponList.screens.jsx
+    │   │   │   └── addEditCoupon.screens.jsx
+    │   │   └── components/
+    │   │       └── couponCard.components.jsx
+    │   │
+    │   └── settings/ // App ki settings.
+    │       └── screens/
+    │           └── settings.screens.jsx
+    │
+    ├── hooks/ // Custom React hooks.
+    │   ├── useApi.hooks.js
+    │   └── useDebounce.hooks.js
+    │
+    ├── navigation/ // App ki screen navigation.
+    │   ├── AppNavigator.navigation.jsx
+    │   ├── AuthStack.navigation.jsx
+    │   └── MainDrawer.navigation.jsx
+    │
+    ├── services/ // Background services.
+    │   ├── analytics.services.js
+    │   └── storage.services.js
+    │
+    ├── store/ // Redux global state management.
+    │   ├── store.store.js
+    │   └── features/ // Redux slices for each feature.
+    │       ├── auth.slice.features.js
+    │       ├── product.slice.features.js
+    │       ├── order.slice.features.js
+    │       └── user.slice.features.js
+    │
+    ├── types/ // (Naya Folder) TypeScript/PropTypes definitions.
+    │   ├── index.types.d.ts
+    │   ├── product.types.js
+    │   └── order.types.js
+    │
+    └── utils/ // Helper functions.
+        ├── formatters.utils.js
+        └── validators.utils.js
