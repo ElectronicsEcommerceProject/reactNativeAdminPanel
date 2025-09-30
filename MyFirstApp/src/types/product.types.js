@@ -1,0 +1,1 @@
+// Product shape - id, name, price, category, stock

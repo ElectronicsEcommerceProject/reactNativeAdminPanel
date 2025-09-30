@@ -1,0 +1,1 @@
+// Category tile - icon, name, product count

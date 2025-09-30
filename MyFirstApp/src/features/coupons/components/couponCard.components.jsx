@@ -1,0 +1,1 @@
+// Coupon tile - code, discount, expiry, usage

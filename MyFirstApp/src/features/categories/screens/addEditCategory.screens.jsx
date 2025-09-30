@@ -1,0 +1,1 @@
+// Create 'Smart Watches' category with icon

@@ -1,0 +1,1 @@
+// Banner preview - image, title, active status

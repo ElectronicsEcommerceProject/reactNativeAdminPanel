@@ -1,0 +1,1 @@
+// App constants - API_TIMEOUT: 10000, PAGE_SIZE: 20

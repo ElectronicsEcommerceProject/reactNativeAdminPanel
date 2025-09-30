@@ -1,0 +1,1 @@
+// Login state - user, token, isAuthenticated
