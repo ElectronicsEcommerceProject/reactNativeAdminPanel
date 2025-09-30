@@ -1,0 +1,1 @@
+// getCategories(), addCategory() - Mobiles, Laptops, TVs
