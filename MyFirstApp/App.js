@@ -11,7 +11,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SplashScreen } from './src/splashScreen/index.splashScreen';
-import { LoginScreen } from './src/features/index.features';
+import { LoginScreen, BannerListScreen } from './src/features/index.features';
 import DashboardScreen from './src/features/dashboard/screens/dashboard.screens';
 
 const Stack = createNativeStackNavigator();
@@ -31,6 +31,7 @@ function App() {
         <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
+          <Stack.Screen name="BannerList" component={BannerListScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

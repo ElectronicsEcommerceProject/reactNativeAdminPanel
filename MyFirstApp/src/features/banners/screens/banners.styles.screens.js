@@ -1,0 +1,430 @@
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
+// Banner List Screen Styles
+export const bannerListStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#4A90E2',
+  },
+  topHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#4A90E2',
+    paddingHorizontal: '4%',
+    paddingVertical: '3%',
+    paddingTop: '5%',
+  },
+  backButton: {
+    width: width * 0.1,
+    height: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backIcon: {
+    fontSize: width * 0.07,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  topHeaderTitle: {
+    fontSize: width * 0.05,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    flex: 1,
+    textAlign: 'center',
+  },
+  addIconButton: {
+    width: width * 0.1,
+    height: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addIcon: {
+    fontSize: width * 0.08,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  bannersList: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  bannersListContent: {
+    padding: '4%',
+    paddingBottom: '8%',
+  },
+  bannerCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 15,
+    marginBottom: '4%',
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  bannerContent: {
+    flexDirection: 'row',
+    padding: '4%',
+    minHeight: height * 0.2,
+    position: 'relative',
+  },
+  discountBadge: {
+    position: 'absolute',
+    top: '5%',
+    left: '5%',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingHorizontal: '3%',
+    paddingVertical: '1%',
+    borderRadius: 5,
+    zIndex: 1,
+  },
+  discountText: {
+    fontSize: width * 0.03,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  bannerTextSection: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingRight: '3%',
+    paddingTop: '8%',
+  },
+  bannerTitle: {
+    fontSize: width * 0.045,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: '2%',
+  },
+  bannerDescription: {
+    fontSize: width * 0.032,
+    color: '#FFFFFF',
+    marginBottom: '2%',
+  },
+  bannerPrice: {
+    fontSize: width * 0.038,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginBottom: '3%',
+  },
+  buttonTextContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    paddingHorizontal: '4%',
+    paddingVertical: '2%',
+    borderRadius: 20,
+    alignSelf: 'flex-start',
+  },
+  buttonText: {
+    fontSize: width * 0.032,
+    color: '#333',
+    fontWeight: '500',
+  },
+  bannerImageSection: {
+    width: width * 0.35,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bannerImage: {
+    width: '100%',
+    height: '90%',
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+  },
+  bannerFooter: {
+    backgroundColor: '#F8F8F8',
+    padding: '3%',
+  },
+  statusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: '2%',
+  },
+  statusBadge: {
+    paddingHorizontal: '3%',
+    paddingVertical: '1.5%',
+    borderRadius: 15,
+    marginRight: '2%',
+  },
+  statusText: {
+    fontSize: width * 0.032,
+    fontWeight: '600',
+  },
+  deactivateButton: {
+    backgroundColor: '#FFEBEE',
+    paddingHorizontal: '3%',
+    paddingVertical: '1.5%',
+    borderRadius: 15,
+    marginRight: '2%',
+  },
+  deactivateButtonText: {
+    fontSize: width * 0.032,
+    color: '#F44336',
+    fontWeight: '500',
+  },
+  iconButton: {
+    width: width * 0.08,
+    height: width * 0.08,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: '1%',
+  },
+  editIcon: {
+    fontSize: width * 0.045,
+  },
+  deleteIcon: {
+    fontSize: width * 0.045,
+  },
+  dateText: {
+    fontSize: width * 0.03,
+    color: '#666',
+    marginTop: '1%',
+  },
+  addNewBannerButton: {
+    backgroundColor: '#4A5FD9',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: '3%',
+    borderRadius: 10,
+    marginTop: '2%',
+  },
+  addNewBannerIcon: {
+    fontSize: width * 0.05,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    marginRight: '2%',
+  },
+  addNewBannerText: {
+    fontSize: width * 0.04,
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: '20%',
+  },
+  emptyText: {
+    fontSize: width * 0.04,
+    color: '#666',
+    textAlign: 'center',
+  },
+});
+
+// Add/Edit Banner Screen Styles
+export const addEditBannerStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+  },
+  header: {
+    backgroundColor: '#FFFFFF',
+    padding: '5%',
+    paddingTop: '3%',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerTitle: {
+    fontSize: width * 0.06,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  saveButton: {
+    backgroundColor: '#007AFF',
+    paddingHorizontal: '4%',
+    paddingVertical: '2%',
+    borderRadius: 8,
+  },
+  saveButtonText: {
+    color: '#FFFFFF',
+    fontSize: width * 0.035,
+    fontWeight: '600',
+  },
+  scrollContainer: {
+    flex: 1,
+  },
+  formContainer: {
+    padding: '5%',
+  },
+  section: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: '5%',
+    marginBottom: '4%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  sectionTitle: {
+    fontSize: width * 0.045,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: '3%',
+  },
+  inputLabel: {
+    fontSize: width * 0.037,
+    color: '#666',
+    marginBottom: '2%',
+    fontWeight: '500',
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+    borderRadius: 8,
+    padding: '3%',
+    fontSize: width * 0.037,
+    color: '#333',
+    backgroundColor: '#FAFAFA',
+    marginBottom: '3%',
+  },
+  imageUploadContainer: {
+    borderWidth: 2,
+    borderColor: '#E0E0E0',
+    borderStyle: 'dashed',
+    borderRadius: 12,
+    padding: '8%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FAFAFA',
+    minHeight: height * 0.2,
+  },
+  imagePreview: {
+    width: '100%',
+    height: height * 0.2,
+    borderRadius: 8,
+    marginBottom: '3%',
+  },
+  uploadText: {
+    fontSize: width * 0.04,
+    color: '#666',
+    textAlign: 'center',
+    marginTop: '2%',
+  },
+  uploadButton: {
+    backgroundColor: '#007AFF',
+    paddingHorizontal: '6%',
+    paddingVertical: '3%',
+    borderRadius: 8,
+    marginTop: '3%',
+  },
+  uploadButtonText: {
+    color: '#FFFFFF',
+    fontSize: width * 0.037,
+    fontWeight: '600',
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: '2%',
+  },
+  switchLabel: {
+    fontSize: width * 0.037,
+    color: '#333',
+    fontWeight: '500',
+  },
+});
+
+// Banner Card Component Styles
+export const bannerCardStyles = StyleSheet.create({
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: '4%',
+    marginBottom: '3%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: '3%',
+  },
+  bannerImage: {
+    width: '100%',
+    height: height * 0.15,
+    borderRadius: 8,
+    marginBottom: '3%',
+  },
+  placeholderImage: {
+    width: '100%',
+    height: height * 0.15,
+    borderRadius: 8,
+    backgroundColor: '#F0F0F0',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: '3%',
+  },
+  placeholderText: {
+    fontSize: width * 0.035,
+    color: '#999',
+  },
+  bannerInfo: {
+    flex: 1,
+    marginRight: '3%',
+  },
+  bannerTitle: {
+    fontSize: width * 0.04,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: '1%',
+  },
+  bannerUrl: {
+    fontSize: width * 0.032,
+    color: '#666',
+    marginBottom: '2%',
+  },
+  bannerDates: {
+    fontSize: width * 0.03,
+    color: '#999',
+  },
+  statusBadge: {
+    paddingHorizontal: '3%',
+    paddingVertical: '1.5%',
+    borderRadius: 20,
+  },
+  statusText: {
+    fontSize: width * 0.03,
+    fontWeight: '600',
+  },
+  cardActions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: '3%',
+    paddingTop: '3%',
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  actionButton: {
+    flex: 1,
+    paddingVertical: '2.5%',
+    borderRadius: 8,
+    alignItems: 'center',
+    marginHorizontal: '1%',
+  },
+  editButton: {
+    backgroundColor: '#007AFF',
+  },
+  deleteButton: {
+    backgroundColor: '#FF3B30',
+  },
+  actionButtonText: {
+    color: '#FFFFFF',
+    fontSize: width * 0.035,
+    fontWeight: '600',
+  },
+});
