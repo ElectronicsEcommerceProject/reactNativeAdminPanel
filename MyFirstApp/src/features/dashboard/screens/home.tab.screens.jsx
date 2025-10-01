@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, ImageBackground } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
 import { homeTabStyles } from './dashboard.styles.screens';
+import { logo } from '../../../assets/index.assets';
 
 
 
@@ -42,13 +43,13 @@ const HomeTabScreen = ({ navigation }) => {
       </View>
 
       {/* Dashboard Card */}
-      <View style={homeTabStyles.dashboardCard}>
+      <ImageBackground source={logo} style={homeTabStyles.dashboardCard} imageStyle={{ borderRadius: 15, opacity: 0.3 }}>
         <Text style={homeTabStyles.dashboardTitle}>DashBoard</Text>
         <View style={homeTabStyles.revenueSection}>
           <Text style={homeTabStyles.revenueLabel}>Total Revenue</Text>
           <Text style={homeTabStyles.revenueAmount}>1,02,000</Text>
         </View>
-      </View>
+      </ImageBackground>
 
       {/* Management Section */}
       <Text style={homeTabStyles.sectionTitle}>Management</Text>
