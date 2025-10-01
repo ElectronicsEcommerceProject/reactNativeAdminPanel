@@ -12,13 +12,19 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import { SplashScreen } from './src/splashScreen/index.splashScreen';
+import { LoginScreen } from './src/features/index.features';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   if (showSplash) {
     return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
+
+  if (!isLoggedIn) {
+    return <LoginScreen />;
   }
 
   return (

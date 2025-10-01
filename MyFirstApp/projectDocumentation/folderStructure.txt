@@ -64,7 +64,8 @@ ecommerce-admin-panel/
     │   ├── index.config.js // Global exports for all config modules - Central import/export hub
     │   ├── colors.config.js // Color palette - PRIMARY: '#007AFF', SUCCESS: '#28A745'
     │   ├── constants.config.js // App constants - API_TIMEOUT: 10000, PAGE_SIZE: 20
-    │   └── typography.config.js // Font sizes - HEADING: 24, BODY: 16, CAPTION: 12
+    │   ├── typography.config.js // Font sizes - HEADING: 24, BODY: 16, CAPTION: 12
+    │   └── url.config.js // API endpoint URLs - /auth/login, /products, /orders, /users
     │
     ├── splashScreen/ // App startup screen - logo animation, loading.
     │   ├── index.splashScreen.js // Global exports for splash screen modules - Central import/export hub
