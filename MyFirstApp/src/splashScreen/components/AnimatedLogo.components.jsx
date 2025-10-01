@@ -16,16 +16,18 @@ const AnimatedLogo = () => {
         duration: 2000,
         useNativeDriver: true,
       }),
-      Animated.timing(translateX, {
-        toValue: -width * 0.15,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(textOpacity, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
+      Animated.parallel([
+        Animated.timing(translateX, {
+          toValue: -width * 0.1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+        Animated.timing(textOpacity, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: true,
+        }),
+      ]),
     ]).start();
   }, []);
 
@@ -70,16 +72,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logoImage: {
-    width: width * 0.15,
-    height: width * 0.15,
+    width: width * 0.18,
+    height: width * 0.18,
+    borderRadius: width * 0.04,
   },
   appName: {
-    fontSize: width * 0.045,
+    fontSize: width * 0.055,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'left',
-    marginLeft: width * 0.05,
-    maxWidth: width * 0.4,
+    marginLeft: width * 0.04,
+    lineHeight: width * 0.065,
   },
 });
 
