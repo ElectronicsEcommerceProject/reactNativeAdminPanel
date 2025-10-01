@@ -3,11 +3,13 @@ import { View, Text, ScrollView, TouchableOpacity, TextInput, ImageBackground } 
 import { COLORS } from '../../../config/colors.config';
 import { homeTabStyles } from './dashboard.styles.screens';
 import { logo } from '../../../assets/index.assets';
+import CustomDrawer from '../components/CustomDrawer.components';
 
 
 
 const HomeTabScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [drawerVisible, setDrawerVisible] = useState(false);
 
   const managementItems = [
     { id: 1, title: 'Product\nManagement', icon: '📦', screen: 'ProductList' },
@@ -19,12 +21,22 @@ const HomeTabScreen = ({ navigation }) => {
   ];
 
   return (
-    <ScrollView style={homeTabStyles.container}>
-      {/* Top Bar with Menu and Search */}
-      <View style={homeTabStyles.topBar}>
-        <TouchableOpacity style={homeTabStyles.menuButton}>
-          <Text style={homeTabStyles.menuIcon}>☰</Text>
-        </TouchableOpacity>
+    <>
+      <CustomDrawer 
+        visible={drawerVisible} 
+        onClose={() => setDrawerVisible(false)} 
+        navigation={navigation}
+      />
+      
+      <ScrollView style={homeTabStyles.container}>
+        {/* Top Bar with Menu and Search */}
+        <View style={homeTabStyles.topBar}>
+          <TouchableOpacity 
+            style={homeTabStyles.menuButton}
+            onPress={() => setDrawerVisible(true)}
+          >
+            <Text style={homeTabStyles.menuIcon}>☰</Text>
+          </TouchableOpacity>
         <View style={homeTabStyles.searchContainer}>
           <Text style={homeTabStyles.searchIcon}>🔍</Text>
           <TextInput
@@ -67,7 +79,8 @@ const HomeTabScreen = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
 

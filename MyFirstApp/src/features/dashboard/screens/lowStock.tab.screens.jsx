@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
 import { lowStockTabStyles } from './dashboard.styles.screens';
+import CustomDrawer from '../components/CustomDrawer.components';
 
 const LowStockTabScreen = ({ navigation }) => {
+  const [drawerVisible, setDrawerVisible] = useState(false);
   const [products] = useState([
     { id: 1, name: 'Wireless Headphones', sku: 'WH-001', stock: 5, minStock: 20, category: 'Electronics' },
     { id: 2, name: 'Smart Watch', sku: 'SW-002', stock: 3, minStock: 15, category: 'Electronics' },
@@ -23,12 +25,27 @@ const LowStockTabScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={lowStockTabStyles.container}>
-      {/* Header */}
-      <View style={lowStockTabStyles.header}>
-        <Text style={lowStockTabStyles.headerTitle}>Low Stock Alert</Text>
-        <Text style={lowStockTabStyles.headerSubtitle}>{products.length} items need attention</Text>
-      </View>
+    <>
+      <CustomDrawer 
+        visible={drawerVisible} 
+        onClose={() => setDrawerVisible(false)} 
+        navigation={navigation}
+      />
+      
+      <View style={lowStockTabStyles.container}>
+        {/* Header */}
+        <View style={lowStockTabStyles.header}>
+          <TouchableOpacity 
+            style={lowStockTabStyles.menuButton}
+            onPress={() => setDrawerVisible(true)}
+          >
+            <Text style={lowStockTabStyles.menuIcon}>☰</Text>
+          </TouchableOpacity>
+          <View style={lowStockTabStyles.headerTextContainer}>
+            <Text style={lowStockTabStyles.headerTitle}>Low Stock Alert</Text>
+            <Text style={lowStockTabStyles.headerSubtitle}>{products.length} items need attention</Text>
+          </View>
+        </View>
 
       {/* Products List */}
       <ScrollView style={lowStockTabStyles.productsList} showsVerticalScrollIndicator={false}>
@@ -92,7 +109,8 @@ const LowStockTabScreen = ({ navigation }) => {
           );
         })}
       </ScrollView>
-    </View>
+      </View>
+    </>
   );
 };
 

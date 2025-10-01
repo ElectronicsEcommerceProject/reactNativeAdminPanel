@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
 import { recentOrdersTabStyles } from './dashboard.styles.screens';
+import CustomDrawer from '../components/CustomDrawer.components';
 
 const RecentOrdersTabScreen = ({ navigation }) => {
+  const [drawerVisible, setDrawerVisible] = useState(false);
   const [orders] = useState([
     { id: '#1001', customer: 'John Doe', amount: '$250', status: 'Delivered', date: '2024-01-15' },
     { id: '#1002', customer: 'Jane Smith', amount: '$180', status: 'Pending', date: '2024-01-15' },
@@ -29,12 +31,27 @@ const RecentOrdersTabScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={recentOrdersTabStyles.container}>
-      {/* Header */}
-      <View style={recentOrdersTabStyles.header}>
-        <Text style={recentOrdersTabStyles.headerTitle}>Recent Orders</Text>
-        <Text style={recentOrdersTabStyles.headerSubtitle}>{orders.length} orders</Text>
-      </View>
+    <>
+      <CustomDrawer 
+        visible={drawerVisible} 
+        onClose={() => setDrawerVisible(false)} 
+        navigation={navigation}
+      />
+      
+      <View style={recentOrdersTabStyles.container}>
+        {/* Header */}
+        <View style={recentOrdersTabStyles.header}>
+          <TouchableOpacity 
+            style={recentOrdersTabStyles.menuButton}
+            onPress={() => setDrawerVisible(true)}
+          >
+            <Text style={recentOrdersTabStyles.menuIcon}>☰</Text>
+          </TouchableOpacity>
+          <View style={recentOrdersTabStyles.headerTextContainer}>
+            <Text style={recentOrdersTabStyles.headerTitle}>Recent Orders</Text>
+            <Text style={recentOrdersTabStyles.headerSubtitle}>{orders.length} orders</Text>
+          </View>
+        </View>
 
       {/* Orders List */}
       <ScrollView style={recentOrdersTabStyles.ordersList} showsVerticalScrollIndicator={false}>
@@ -64,7 +81,8 @@ const RecentOrdersTabScreen = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </View>
+      </View>
+    </>
   );
 };
 

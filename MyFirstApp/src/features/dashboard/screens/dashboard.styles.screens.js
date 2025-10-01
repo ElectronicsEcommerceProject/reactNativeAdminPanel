@@ -139,11 +139,27 @@ export const recentOrdersTabStyles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#FFFFFF',
     padding: '5%',
     paddingTop: '3%',
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
+  },
+  menuButton: {
+    width: width * 0.1,
+    height: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '3%',
+  },
+  menuIcon: {
+    fontSize: width * 0.06,
+    color: '#333',
+  },
+  headerTextContainer: {
+    flex: 1,
   },
   headerTitle: {
     fontSize: width * 0.06,
@@ -221,11 +237,27 @@ export const lowStockTabStyles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#FFFFFF',
     padding: '5%',
     paddingTop: '3%',
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
+  },
+  menuButton: {
+    width: width * 0.1,
+    height: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: '3%',
+  },
+  menuIcon: {
+    fontSize: width * 0.06,
+    color: '#333',
+  },
+  headerTextContainer: {
+    flex: 1,
   },
   headerTitle: {
     fontSize: width * 0.06,
