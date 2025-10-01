@@ -34,7 +34,29 @@ const RecentOrdersTabScreen = ({ navigation }) => {
     }
   };
 
+  // Filter orders based on search query
+  const filterOrders = (orders) => {
+    if (!searchQuery.trim()) {
+      return orders;
+    }
+
+    const query = searchQuery.toLowerCase().trim();
+    
+    return orders.filter((order) => {
+      // Search in all order fields
+      const searchableText = [
+        order.id,
+        order.type,
+        order.date,
+        order.status
+      ].join(' ').toLowerCase();
+
+      return searchableText.includes(query);
+    });
+  };
+
   const currentOrders = activeTab === 'Customer' ? customerOrders : retailerOrders;
+  const filteredOrders = filterOrders(currentOrders);
 
   return (
     <>
@@ -110,7 +132,14 @@ const RecentOrdersTabScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={recentOrdersTabStyles.ordersGridContent}
         >
-          {currentOrders.map((order, index) => (
+          {filteredOrders.length === 0 ? (
+            <View style={recentOrdersTabStyles.noResultsContainer}>
+              <Text style={recentOrdersTabStyles.noResultsText}>
+                No orders found matching "{searchQuery}"
+              </Text>
+            </View>
+          ) : (
+            filteredOrders.map((order, index) => (
             <TouchableOpacity
               key={`${order.id}-${index}`}
               style={recentOrdersTabStyles.orderCard}
@@ -133,7 +162,7 @@ const RecentOrdersTabScreen = ({ navigation }) => {
                 {order.status}
               </Text>
             </TouchableOpacity>
-          ))}
+          )))}
         </ScrollView>
       </View>
     </>

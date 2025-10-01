@@ -274,6 +274,18 @@ export const recentOrdersTabStyles = StyleSheet.create({
     fontWeight: '600',
     marginBottom: '1%',
   },
+  noResultsContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: '20%',
+  },
+  noResultsText: {
+    fontSize: width * 0.04,
+    color: '#666',
+    textAlign: 'center',
+  },
 });
 
 // Low Stock Tab Styles
