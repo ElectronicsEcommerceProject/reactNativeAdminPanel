@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Text, StyleSheet } from 'react-native';
+import { Animated, Text, StyleSheet, Image } from 'react-native';
 
 const AnimatedLogo = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -31,7 +31,11 @@ const AnimatedLogo = () => {
         },
       ]}
     >
-      <Text style={styles.logoText}>📱</Text>
+      <Image 
+        source={require('../../assets/images/logo.jpg')} 
+        style={styles.logoImage}
+        resizeMode="contain"
+      />
       <Text style={styles.appName}>Admin Panel</Text>
     </Animated.View>
   );
@@ -41,8 +45,9 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
   },
-  logoText: {
-    fontSize: 80,
+  logoImage: {
+    width: 120,
+    height: 120,
     marginBottom: 20,
   },
   appName: {
