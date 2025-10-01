@@ -2,41 +2,45 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { bannerListStyles } from './banners.styles.screens';
 import BannerCard from '../components/bannerCard.components';
+import LinearGradient from 'react-native-linear-gradient';
 
 const BannerListScreen = ({ navigation }) => {
   const banners = [
     {
       id: 1,
-      title: 'Summer Sale Banner',
-      description: 'Electronics & Gadgets',
-      price: 'Starting ₹199',
-      buttonText: 'Shop Now',
-      discount: '50% off',
+      title: 'Banner Title',
+      description: 'Description',
+      price: 'Starting 199',
+      buttonText: 'Button Text',
+      discount: '7% off',
       status: 'Active',
-      updatedAt: '7/3/2025',
-      imageUrl: 'https://via.placeholder.com/300x150/007AFF/FFFFFF?text=Electronics',
-      backgroundColor: '#007AFF',
+      updatedAt: 'Updated - 7/3/2025',
+      imageUrl: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=120&fit=crop',
+      gradientColors: ['#B85450', '#8B4A8B'],
     },
     {
       id: 2,
-      title: 'Mobile Accessories',
-      description: 'Phones & Accessories',
-      price: 'Starting ₹99',
-      buttonText: 'Buy Now',
-      discount: '30% off',
+      title: 'Banner Title',
+      description: 'Description',
+      price: 'Starting 199',
+      buttonText: 'Button Text',
+      discount: '7% off',
       status: 'Active',
-      createdAt: '8/7/2025',
-      imageUrl: 'https://via.placeholder.com/300x150/FF6B35/FFFFFF?text=Mobile',
-      backgroundColor: '#FF6B35',
+      createdAt: 'Created - 8/7/2025',
+      imageUrl: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=200&h=120&fit=crop',
+      gradientColors: ['#4A9B8E', '#2E5C8A'],
     },
   ];
 
   return (
     <View style={bannerListStyles.container}>
-      <View style={bannerListStyles.header}>
-        <Text style={bannerListStyles.headerTitle}>Banner Management</Text>
-        <TouchableOpacity style={bannerListStyles.addButton}>
-          <Text style={bannerListStyles.addButtonText}>Add Banner</Text>
+      <View style={bannerListStyles.topHeader}>
+        <TouchableOpacity style={bannerListStyles.backButton} onPress={() => navigation.goBack()}>
+          <Text style={bannerListStyles.backIcon}>←</Text>
+        </TouchableOpacity>
+        <Text style={bannerListStyles.topHeaderTitle}>Banner Management</Text>
+        <TouchableOpacity style={bannerListStyles.addIconButton}>
+          <Text style={bannerListStyles.addIcon}>⊕</Text>
         </TouchableOpacity>
       </View>
       
@@ -54,9 +58,13 @@ const BannerListScreen = ({ navigation }) => {
               updatedAt={banner.updatedAt}
               createdAt={banner.createdAt}
               imageUrl={banner.imageUrl}
-              backgroundColor={banner.backgroundColor}
+              gradientColors={banner.gradientColors}
             />
           ))}
+          <TouchableOpacity style={bannerListStyles.addNewBannerButton} onPress={() => navigation.navigate('AddEditBanner')}>
+            <Text style={bannerListStyles.addNewBannerIcon}>+</Text>
+            <Text style={bannerListStyles.addNewBannerText}>Add New Banner</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

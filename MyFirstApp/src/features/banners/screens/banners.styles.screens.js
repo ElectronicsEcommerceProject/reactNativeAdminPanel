@@ -53,13 +53,13 @@ export const bannerListStyles = StyleSheet.create({
     borderTopRightRadius: 20,
   },
   bannersListContent: {
-    padding: '4%',
-    paddingBottom: '8%',
+    padding: 16,
+    paddingBottom: 32,
   },
   bannerCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
-    marginBottom: '4%',
+    marginBottom: 16,
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -69,17 +69,17 @@ export const bannerListStyles = StyleSheet.create({
   },
   bannerContent: {
     flexDirection: 'row',
-    padding: '4%',
-    minHeight: height * 0.2,
+    padding: 16,
+    minHeight: 160,
     position: 'relative',
   },
   discountBadge: {
     position: 'absolute',
-    top: '5%',
-    left: '5%',
+    top: 12,
+    left: 12,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    paddingHorizontal: '3%',
-    paddingVertical: '1%',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
     borderRadius: 5,
     zIndex: 1,
   },
@@ -91,8 +91,8 @@ export const bannerListStyles = StyleSheet.create({
   bannerTextSection: {
     flex: 1,
     justifyContent: 'center',
-    paddingRight: '3%',
-    paddingTop: '8%',
+    paddingRight: 12,
+    paddingTop: 24,
   },
   bannerTitle: {
     fontSize: width * 0.045,
@@ -113,8 +113,8 @@ export const bannerListStyles = StyleSheet.create({
   },
   buttonTextContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    paddingHorizontal: '4%',
-    paddingVertical: '2%',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
     borderRadius: 20,
     alignSelf: 'flex-start',
   },
@@ -124,30 +124,30 @@ export const bannerListStyles = StyleSheet.create({
     fontWeight: '500',
   },
   bannerImageSection: {
-    width: width * 0.35,
+    width: 120,
     justifyContent: 'center',
     alignItems: 'center',
   },
   bannerImage: {
-    width: '100%',
-    height: '90%',
+    width: 100,
+    height: 80,
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
   },
   bannerFooter: {
     backgroundColor: '#F8F8F8',
-    padding: '3%',
+    padding: 12,
   },
   statusRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: '2%',
+    marginBottom: 8,
   },
   statusBadge: {
-    paddingHorizontal: '3%',
-    paddingVertical: '1.5%',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: 15,
-    marginRight: '2%',
+    marginRight: 8,
   },
   statusText: {
     fontSize: width * 0.032,
@@ -155,10 +155,10 @@ export const bannerListStyles = StyleSheet.create({
   },
   deactivateButton: {
     backgroundColor: '#FFEBEE',
-    paddingHorizontal: '3%',
-    paddingVertical: '1.5%',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
     borderRadius: 15,
-    marginRight: '2%',
+    marginRight: 8,
   },
   deactivateButtonText: {
     fontSize: width * 0.032,
@@ -166,11 +166,11 @@ export const bannerListStyles = StyleSheet.create({
     fontWeight: '500',
   },
   iconButton: {
-    width: width * 0.08,
-    height: width * 0.08,
+    width: 32,
+    height: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: '1%',
+    marginLeft: 4,
   },
   editIcon: {
     fontSize: width * 0.045,
@@ -188,9 +188,10 @@ export const bannerListStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: '3%',
+    paddingVertical: 16,
     borderRadius: 10,
-    marginTop: '2%',
+    marginTop: 16,
+    marginHorizontal: 16,
   },
   addNewBannerIcon: {
     fontSize: width * 0.05,
@@ -214,9 +215,7 @@ export const bannerListStyles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
-  bannersListContent: {
-    paddingBottom: '5%',
-  },
+
 });
 
 // Add/Edit Banner Screen Styles
