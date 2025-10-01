@@ -214,6 +214,9 @@ export const bannerListStyles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
+  bannersListContent: {
+    paddingBottom: '5%',
+  },
 });
 
 // Add/Edit Banner Screen Styles
@@ -426,5 +429,10 @@ export const bannerCardStyles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: width * 0.035,
     fontWeight: '600',
+  },
+  bannerPreview: {
+    borderRadius: 8,
+    padding: '3%',
+    marginBottom: '3%',
   },
 });
