@@ -5,18 +5,25 @@ import { logo } from '../../assets/index.assets';
 const { width } = Dimensions.get('window');
 
 const AnimatedLogo = () => {
-  const scaleAnim = useRef(new Animated.Value(0.1)).current;
+  const scaleAnim = useRef(new Animated.Value(1)).current; // Start at normal size
   const translateX = useRef(new Animated.Value(0)).current;
   const textOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.sequence([
+      // First: Scale up (grow bigger)
       Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 2000,
+        toValue: 1.5, // Grow to 1.5x size
+        duration: 1000,
         useNativeDriver: true,
       }),
+      // Then: Scale back down and translate to left simultaneously
       Animated.parallel([
+        Animated.timing(scaleAnim, {
+          toValue: 1, // Return to normal size
+          duration: 500,
+          useNativeDriver: true,
+        }),
         Animated.timing(translateX, {
           toValue: -width * 0.1,
           duration: 500,
@@ -47,23 +54,23 @@ const AnimatedLogo = () => {
           resizeMode="contain"
         />
       </Animated.View>
-      <Animated.Text 
+      <Animated.View 
         style={[
-          styles.appName,
+          styles.textContainer,
           {
             opacity: textOpacity,
           },
         ]}
       >
-        MAA LAXMI STORE{"\n"}ADMIN PANEL
-      </Animated.Text>
+        <Text style={styles.appName}>MAA LAXMI STORE</Text>
+        <Text style={styles.adminPanel}>ADMIN PANEL</Text>
+      </Animated.View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
@@ -76,13 +83,27 @@ const styles = StyleSheet.create({
     height: width * 0.18,
     borderRadius: width * 0.04,
   },
+  textContainer: {
+    marginLeft: width * 0.04,
+  },
   appName: {
     fontSize: width * 0.055,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'left',
-    marginLeft: width * 0.04,
     lineHeight: width * 0.065,
+  },
+  adminPanel: {
+    fontSize: width * 0.045,
+    fontWeight: '800',
+    color: '#FFD700', // Gold color for highlighting
+    textAlign: 'left',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Semi-transparent white background
+    paddingHorizontal: width * 0.02,
+    paddingVertical: width * 0.01,
+    borderRadius: width * 0.01,
+    marginTop: width * 0.01,
+    overflow: 'hidden',
   },
 });
 
