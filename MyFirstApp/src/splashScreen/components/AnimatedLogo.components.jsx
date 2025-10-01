@@ -1,59 +1,85 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, Text, StyleSheet, Image } from 'react-native';
+import { Animated, Text, StyleSheet, Image, View, Dimensions } from 'react-native';
+import { logo } from '../../assets/index.assets';
+
+const { width } = Dimensions.get('window');
 
 const AnimatedLogo = () => {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(0.5)).current;
+  const scaleAnim = useRef(new Animated.Value(0.1)).current;
+  const translateX = useRef(new Animated.Value(0)).current;
+  const textOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
+    Animated.sequence([
+      Animated.timing(scaleAnim, {
         toValue: 1,
-        duration: 1000,
+        duration: 2000,
         useNativeDriver: true,
       }),
-      Animated.spring(scaleAnim, {
+      Animated.timing(translateX, {
+        toValue: -width * 0.15,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(textOpacity, {
         toValue: 1,
-        tension: 100,
-        friction: 8,
+        duration: 500,
         useNativeDriver: true,
       }),
     ]).start();
   }, []);
 
   return (
-    <Animated.View
-      style={[
-        styles.logoContainer,
-        {
-          opacity: fadeAnim,
-          transform: [{ scale: scaleAnim }],
-        },
-      ]}
-    >
-      <Image 
-        source={require('../../assets/images/logo.jpg')} 
-        style={styles.logoImage}
-        resizeMode="contain"
-      />
-      <Text style={styles.appName}>Admin Panel</Text>
-    </Animated.View>
+    <View style={styles.container}>
+      <Animated.View
+        style={[
+          styles.logoContainer,
+          {
+            transform: [{ scale: scaleAnim }, { translateX: translateX }],
+          },
+        ]}
+      >
+        <Image 
+          source={logo} 
+          style={styles.logoImage}
+          resizeMode="contain"
+        />
+      </Animated.View>
+      <Animated.Text 
+        style={[
+          styles.appName,
+          {
+            opacity: textOpacity,
+          },
+        ]}
+      >
+        MAA LAXMI STORE{"\n"}ADMIN PANEL
+      </Animated.Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
   logoContainer: {
     alignItems: 'center',
   },
   logoImage: {
-    width: 120,
-    height: 120,
-    marginBottom: 20,
+    width: width * 0.15,
+    height: width * 0.15,
   },
   appName: {
-    fontSize: 24,
+    fontSize: width * 0.045,
     fontWeight: 'bold',
     color: 'white',
+    textAlign: 'left',
+    marginLeft: width * 0.05,
+    maxWidth: width * 0.4,
   },
 });
 

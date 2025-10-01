@@ -11,7 +11,7 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import SplashScreen from './src/splashScreen/screens/splashScreen.screens';
+import { SplashScreen } from './src/splashScreen/index.splashScreen';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
