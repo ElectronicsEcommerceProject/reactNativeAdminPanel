@@ -207,5 +207,6 @@ ecommerce-admin-panel/
     │   └── order.types.js // Order shape - id, userId, items[], total, status
     │
     └── utils/ // Helper functions - formatting, validation.
+        ├── index.utils.js // Global exports for all utility modules - Central import/export hub
         ├── formatters.utils.js // formatPrice(1234) → '₹1,234', formatDate()
         └── validators.utils.js // validateEmail(), validatePhone(), validateRequired()
