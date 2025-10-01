@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
+import { recentOrdersTabStyles } from './dashboard.styles.screens';
 
 const RecentOrdersTabScreen = ({ navigation }) => {
   const [orders] = useState([
@@ -28,34 +29,34 @@ const RecentOrdersTabScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={recentOrdersTabStyles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Recent Orders</Text>
-        <Text style={styles.headerSubtitle}>{orders.length} orders</Text>
+      <View style={recentOrdersTabStyles.header}>
+        <Text style={recentOrdersTabStyles.headerTitle}>Recent Orders</Text>
+        <Text style={recentOrdersTabStyles.headerSubtitle}>{orders.length} orders</Text>
       </View>
 
       {/* Orders List */}
-      <ScrollView style={styles.ordersList} showsVerticalScrollIndicator={false}>
+      <ScrollView style={recentOrdersTabStyles.ordersList} showsVerticalScrollIndicator={false}>
         {orders.map((order) => (
           <TouchableOpacity
             key={order.id}
-            style={styles.orderCard}
+            style={recentOrdersTabStyles.orderCard}
             onPress={() => navigation.navigate('OrderDetail', { orderId: order.id })}
           >
-            <View style={styles.orderHeader}>
-              <Text style={styles.orderId}>{order.id}</Text>
-              <Text style={styles.orderDate}>{order.date}</Text>
+            <View style={recentOrdersTabStyles.orderHeader}>
+              <Text style={recentOrdersTabStyles.orderId}>{order.id}</Text>
+              <Text style={recentOrdersTabStyles.orderDate}>{order.date}</Text>
             </View>
             
-            <View style={styles.orderBody}>
-              <View style={styles.orderInfo}>
-                <Text style={styles.customerName}>{order.customer}</Text>
-                <Text style={styles.orderAmount}>{order.amount}</Text>
+            <View style={recentOrdersTabStyles.orderBody}>
+              <View style={recentOrdersTabStyles.orderInfo}>
+                <Text style={recentOrdersTabStyles.customerName}>{order.customer}</Text>
+                <Text style={recentOrdersTabStyles.orderAmount}>{order.amount}</Text>
               </View>
               
-              <View style={[styles.statusBadge, { backgroundColor: getStatusColor(order.status) + '20' }]}>
-                <Text style={[styles.statusText, { color: getStatusColor(order.status) }]}>
+              <View style={[recentOrdersTabStyles.statusBadge, { backgroundColor: getStatusColor(order.status) + '20' }]}>
+                <Text style={[recentOrdersTabStyles.statusText, { color: getStatusColor(order.status) }]}>
                   {order.status}
                 </Text>
               </View>
@@ -67,85 +68,6 @@ const RecentOrdersTabScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  header: {
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    paddingTop: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 5,
-  },
-  ordersList: {
-    flex: 1,
-    padding: 15,
-  },
-  orderCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 15,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  orderHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  orderId: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#007AFF',
-  },
-  orderDate: {
-    fontSize: 12,
-    color: '#999',
-  },
-  orderBody: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  orderInfo: {
-    flex: 1,
-  },
-  customerName: {
-    fontSize: 15,
-    color: '#333',
-    marginBottom: 5,
-  },
-  orderAmount: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  statusBadge: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-});
+
 
 export default RecentOrdersTabScreen;

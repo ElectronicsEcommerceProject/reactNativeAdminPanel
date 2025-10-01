@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
+import { lowStockTabStyles } from './dashboard.styles.screens';
 
 const LowStockTabScreen = ({ navigation }) => {
   const [products] = useState([
@@ -22,56 +23,56 @@ const LowStockTabScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={lowStockTabStyles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Low Stock Alert</Text>
-        <Text style={styles.headerSubtitle}>{products.length} items need attention</Text>
+      <View style={lowStockTabStyles.header}>
+        <Text style={lowStockTabStyles.headerTitle}>Low Stock Alert</Text>
+        <Text style={lowStockTabStyles.headerSubtitle}>{products.length} items need attention</Text>
       </View>
 
       {/* Products List */}
-      <ScrollView style={styles.productsList} showsVerticalScrollIndicator={false}>
+      <ScrollView style={lowStockTabStyles.productsList} showsVerticalScrollIndicator={false}>
         {products.map((product) => {
           const stockInfo = getStockLevel(product.stock, product.minStock);
           return (
             <TouchableOpacity
               key={product.id}
-              style={styles.productCard}
+              style={lowStockTabStyles.productCard}
               onPress={() => navigation.navigate('ProductList')}
             >
-              <View style={styles.productHeader}>
-                <View style={styles.productInfo}>
-                  <Text style={styles.productName}>{product.name}</Text>
-                  <Text style={styles.productSku}>SKU: {product.sku}</Text>
-                  <Text style={styles.productCategory}>{product.category}</Text>
+              <View style={lowStockTabStyles.productHeader}>
+                <View style={lowStockTabStyles.productInfo}>
+                  <Text style={lowStockTabStyles.productName}>{product.name}</Text>
+                  <Text style={lowStockTabStyles.productSku}>SKU: {product.sku}</Text>
+                  <Text style={lowStockTabStyles.productCategory}>{product.category}</Text>
                 </View>
                 
-                <View style={[styles.stockBadge, { backgroundColor: stockInfo.color + '20' }]}>
-                  <Text style={[styles.stockLevel, { color: stockInfo.color }]}>
+                <View style={[lowStockTabStyles.stockBadge, { backgroundColor: stockInfo.color + '20' }]}>
+                  <Text style={[lowStockTabStyles.stockLevel, { color: stockInfo.color }]}>
                     {stockInfo.level}
                   </Text>
                 </View>
               </View>
               
-              <View style={styles.stockInfo}>
-                <View style={styles.stockRow}>
-                  <Text style={styles.stockLabel}>Current Stock:</Text>
-                  <Text style={[styles.stockValue, { color: stockInfo.color }]}>
+              <View style={lowStockTabStyles.stockInfo}>
+                <View style={lowStockTabStyles.stockRow}>
+                  <Text style={lowStockTabStyles.stockLabel}>Current Stock:</Text>
+                  <Text style={[lowStockTabStyles.stockValue, { color: stockInfo.color }]}>
                     {product.stock} units
                   </Text>
                 </View>
-                <View style={styles.stockRow}>
-                  <Text style={styles.stockLabel}>Minimum Required:</Text>
-                  <Text style={styles.stockValue}>{product.minStock} units</Text>
+                <View style={lowStockTabStyles.stockRow}>
+                  <Text style={lowStockTabStyles.stockLabel}>Minimum Required:</Text>
+                  <Text style={lowStockTabStyles.stockValue}>{product.minStock} units</Text>
                 </View>
               </View>
 
               {/* Progress Bar */}
-              <View style={styles.progressBarContainer}>
-                <View style={styles.progressBarBackground}>
+              <View style={lowStockTabStyles.progressBarContainer}>
+                <View style={lowStockTabStyles.progressBarBackground}>
                   <View 
                     style={[
-                      styles.progressBarFill, 
+                      lowStockTabStyles.progressBarFill, 
                       { 
                         width: `${Math.min((product.stock / product.minStock) * 100, 100)}%`,
                         backgroundColor: stockInfo.color 
@@ -79,13 +80,13 @@ const LowStockTabScreen = ({ navigation }) => {
                     ]} 
                   />
                 </View>
-                <Text style={styles.progressText}>
+                <Text style={lowStockTabStyles.progressText}>
                   {Math.round((product.stock / product.minStock) * 100)}%
                 </Text>
               </View>
 
-              <TouchableOpacity style={styles.reorderButton}>
-                <Text style={styles.reorderButtonText}>Reorder Now</Text>
+              <TouchableOpacity style={lowStockTabStyles.reorderButton}>
+                <Text style={lowStockTabStyles.reorderButtonText}>Reorder Now</Text>
               </TouchableOpacity>
             </TouchableOpacity>
           );
@@ -95,129 +96,6 @@ const LowStockTabScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  header: {
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    paddingTop: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: '#F44336',
-    marginTop: 5,
-    fontWeight: '500',
-  },
-  productsList: {
-    flex: 1,
-    padding: 15,
-  },
-  productCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 15,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  productHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 12,
-  },
-  productInfo: {
-    flex: 1,
-  },
-  productName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 4,
-  },
-  productSku: {
-    fontSize: 13,
-    color: '#666',
-    marginBottom: 2,
-  },
-  productCategory: {
-    fontSize: 12,
-    color: '#999',
-  },
-  stockBadge: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-  },
-  stockLevel: {
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
-  stockInfo: {
-    marginBottom: 12,
-  },
-  stockRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 6,
-  },
-  stockLabel: {
-    fontSize: 14,
-    color: '#666',
-  },
-  stockValue: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#333',
-  },
-  progressBarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  progressBarBackground: {
-    flex: 1,
-    height: 8,
-    backgroundColor: '#E0E0E0',
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginRight: 10,
-  },
-  progressBarFill: {
-    height: '100%',
-    borderRadius: 4,
-  },
-  progressText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#666',
-    width: 40,
-    textAlign: 'right',
-  },
-  reorderButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 10,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  reorderButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-});
+
 
 export default LowStockTabScreen;
