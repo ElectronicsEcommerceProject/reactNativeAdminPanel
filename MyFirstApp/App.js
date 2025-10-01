@@ -18,20 +18,20 @@ import AddEditBannerScreen from './src/features/banners/screens/addEditBanner.sc
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  // const [showSplash, setShowSplash] = useState(true);
   const isDarkMode = useColorScheme() === 'dark';
 
-  if (showSplash) {
-    return <SplashScreen onFinish={() => setShowSplash(false)} />;
-  }
+  // if (showSplash) {
+  //   return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  // }
 
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Navigator initialRouteName="BannerList" screenOptions={{ headerShown: false }}>
+          {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+          {/* <Stack.Screen name="Dashboard" component={DashboardScreen} /> */}
           <Stack.Screen name="BannerList" component={BannerListScreen} />
           <Stack.Screen name="AddEditBanner" component={AddEditBannerScreen} />
         </Stack.Navigator>
