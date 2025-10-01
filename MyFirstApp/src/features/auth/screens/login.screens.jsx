@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image, ToastAndroid } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { loginStyles } from './login.styles.screens';
 import { logo } from '../../../assets/index.assets';
@@ -17,8 +17,10 @@ const LoginScreen = ({ navigation }) => {
     setLoading(true);
     try {
       if (data.email === 'admin@gmail.com' && data.password === '123456') {
-        Alert.alert('Success', 'Login successful!');
-        navigation.navigate('Dashboard');
+        ToastAndroid.show('Login successful!', ToastAndroid.SHORT);
+        setTimeout(() => {
+          navigation.navigate('Dashboard');
+        }, 1000);
       } else {
         Alert.alert('Error', 'Invalid credentials. Use admin@gmail.com / 123456');
       }
