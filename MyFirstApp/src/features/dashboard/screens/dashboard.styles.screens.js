@@ -136,97 +136,143 @@ export const homeTabStyles = StyleSheet.create({
 export const recentOrdersTabStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#1E3A5F',
   },
-  header: {
+  topHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: '5%',
-    paddingTop: '3%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    justifyContent: 'space-between',
+    backgroundColor: '#1E3A5F',
+    paddingHorizontal: '4%',
+    paddingVertical: '3%',
+    paddingTop: '5%',
   },
-  menuButton: {
+  backButton: {
     width: width * 0.1,
     height: width * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '3%',
   },
-  menuIcon: {
-    fontSize: width * 0.06,
-    color: '#333',
-  },
-  headerTextContainer: {
-    flex: 1,
-  },
-  headerTitle: {
-    fontSize: width * 0.06,
+  backIcon: {
+    fontSize: width * 0.07,
+    color: '#FFFFFF',
     fontWeight: 'bold',
+  },
+  topHeaderTitle: {
+    fontSize: width * 0.05,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    flex: 1,
+    textAlign: 'center',
+  },
+  addButton: {
+    width: width * 0.1,
+    height: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addIcon: {
+    fontSize: width * 0.08,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: '4%',
+    marginVertical: '3%',
+    paddingHorizontal: '3%',
+    borderRadius: 25,
+    height: width * 0.12,
+  },
+  searchIcon: {
+    fontSize: width * 0.045,
+    marginRight: '2%',
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: width * 0.035,
     color: '#333',
   },
-  headerSubtitle: {
-    fontSize: width * 0.035,
-    color: '#666',
-    marginTop: '1%',
+  tabContainer: {
+    flexDirection: 'row',
+    marginHorizontal: '4%',
+    marginBottom: '3%',
+    backgroundColor: '#E0E0E0',
+    borderRadius: 8,
+    padding: '1%',
   },
-  ordersList: {
+  tab: {
     flex: 1,
-    padding: '4%',
+    paddingVertical: '3%',
+    alignItems: 'center',
+    borderRadius: 6,
+  },
+  activeTab: {
+    backgroundColor: '#4A5FD9',
+  },
+  tabText: {
+    fontSize: width * 0.038,
+    color: '#666',
+    fontWeight: '500',
+  },
+  activeTabText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+  },
+  ordersGrid: {
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: '4%',
+  },
+  ordersGridContent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: '2%',
+    paddingBottom: '5%',
   },
   orderCard: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    width: '47%',
+    margin: '1.5%',
     padding: '4%',
-    marginBottom: '3%',
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
-  orderHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '2%',
+  orderLabel: {
+    fontSize: width * 0.032,
+    color: '#666',
+    marginTop: '2%',
   },
   orderId: {
-    fontSize: width * 0.04,
-    fontWeight: 'bold',
-    color: '#007AFF',
+    fontSize: width * 0.03,
+    color: '#333',
+    fontWeight: '500',
+    marginBottom: '1%',
+  },
+  orderType: {
+    fontSize: width * 0.03,
+    color: '#333',
+    fontWeight: '500',
+    marginBottom: '1%',
   },
   orderDate: {
     fontSize: width * 0.03,
-    color: '#999',
-  },
-  orderBody: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  orderInfo: {
-    flex: 1,
-  },
-  customerName: {
-    fontSize: width * 0.037,
     color: '#333',
+    fontWeight: '500',
     marginBottom: '1%',
   },
-  orderAmount: {
-    fontSize: width * 0.045,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  statusBadge: {
-    paddingHorizontal: '3%',
-    paddingVertical: '1.5%',
-    borderRadius: 20,
-  },
-  statusText: {
+  orderStatus: {
     fontSize: width * 0.03,
     fontWeight: '600',
+    marginBottom: '1%',
   },
 });
 

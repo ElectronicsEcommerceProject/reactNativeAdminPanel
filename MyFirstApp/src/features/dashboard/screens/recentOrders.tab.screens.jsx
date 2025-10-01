@@ -1,34 +1,40 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
 import { recentOrdersTabStyles } from './dashboard.styles.screens';
 import CustomDrawer from '../components/CustomDrawer.components';
 
 const RecentOrdersTabScreen = ({ navigation }) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [orders] = useState([
-    { id: '#1001', customer: 'John Doe', amount: '$250', status: 'Delivered', date: '2024-01-15' },
-    { id: '#1002', customer: 'Jane Smith', amount: '$180', status: 'Pending', date: '2024-01-15' },
-    { id: '#1003', customer: 'Mike Johnson', amount: '$320', status: 'Processing', date: '2024-01-14' },
-    { id: '#1004', customer: 'Sarah Williams', amount: '$450', status: 'Delivered', date: '2024-01-14' },
-    { id: '#1005', customer: 'Tom Brown', amount: '$290', status: 'Pending', date: '2024-01-13' },
-    { id: '#1006', customer: 'Emily Davis', amount: '$380', status: 'Processing', date: '2024-01-13' },
-    { id: '#1007', customer: 'David Wilson', amount: '$210', status: 'Delivered', date: '2024-01-12' },
-    { id: '#1008', customer: 'Lisa Anderson', amount: '$560', status: 'Pending', date: '2024-01-12' },
+  const [activeTab, setActiveTab] = useState('Customer');
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  const [customerOrders] = useState([
+    { id: 'ORD-20250715-0302', type: 'Customer', date: '2025-07-15', status: 'Processing' },
+    { id: 'ORD-20250715-0302', type: 'Customer', date: '2025-07-15', status: 'Cancelled' },
+    { id: 'ORD-20250715-0302', type: 'Customer', date: '2025-07-15', status: 'Processing' },
+  ]);
+
+  const [retailerOrders] = useState([
+    { id: 'ORD-20250715-0302', type: 'Customer', date: '2025-07-15', status: 'Pending' },
+    { id: 'ORD-20250715-0302', type: 'Customer', date: '2025-07-15', status: 'Cancelled' },
+    { id: 'ORD-20250715-0302', type: 'Customer', date: '2025-07-15', status: 'Pending' },
   ]);
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'Delivered':
-        return '#4CAF50';
       case 'Processing':
-        return '#FF9800';
-      case 'Pending':
+        return '#4CAF50';
+      case 'Cancelled':
         return '#F44336';
+      case 'Pending':
+        return '#FFA500';
       default:
         return '#999';
     }
   };
+
+  const currentOrders = activeTab === 'Customer' ? customerOrders : retailerOrders;
 
   return (
     <>
@@ -39,48 +45,96 @@ const RecentOrdersTabScreen = ({ navigation }) => {
       />
       
       <View style={recentOrdersTabStyles.container}>
-        {/* Header */}
-        <View style={recentOrdersTabStyles.header}>
+        {/* Header with Back Button and Add Button */}
+        <View style={recentOrdersTabStyles.topHeader}>
           <TouchableOpacity 
-            style={recentOrdersTabStyles.menuButton}
-            onPress={() => setDrawerVisible(true)}
+            style={recentOrdersTabStyles.backButton}
+            onPress={() => navigation.goBack()}
           >
-            <Text style={recentOrdersTabStyles.menuIcon}>☰</Text>
+            <Text style={recentOrdersTabStyles.backIcon}>←</Text>
           </TouchableOpacity>
-          <View style={recentOrdersTabStyles.headerTextContainer}>
-            <Text style={recentOrdersTabStyles.headerTitle}>Recent Orders</Text>
-            <Text style={recentOrdersTabStyles.headerSubtitle}>{orders.length} orders</Text>
-          </View>
+          <Text style={recentOrdersTabStyles.topHeaderTitle}>Recent Orders</Text>
+          <TouchableOpacity style={recentOrdersTabStyles.addButton}>
+            <Text style={recentOrdersTabStyles.addIcon}>⊕</Text>
+          </TouchableOpacity>
         </View>
 
-      {/* Orders List */}
-      <ScrollView style={recentOrdersTabStyles.ordersList} showsVerticalScrollIndicator={false}>
-        {orders.map((order) => (
+        {/* Search Bar */}
+        <View style={recentOrdersTabStyles.searchContainer}>
+          <Text style={recentOrdersTabStyles.searchIcon}>🔍</Text>
+          <TextInput
+            style={recentOrdersTabStyles.searchInput}
+            placeholder="Search for recent Orders"
+            placeholderTextColor="#999"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        </View>
+
+        {/* Customer/Retailer Tabs */}
+        <View style={recentOrdersTabStyles.tabContainer}>
           <TouchableOpacity
-            key={order.id}
-            style={recentOrdersTabStyles.orderCard}
-            onPress={() => navigation.navigate('OrderDetail', { orderId: order.id })}
+            style={[
+              recentOrdersTabStyles.tab,
+              activeTab === 'Customer' && recentOrdersTabStyles.activeTab
+            ]}
+            onPress={() => setActiveTab('Customer')}
           >
-            <View style={recentOrdersTabStyles.orderHeader}>
-              <Text style={recentOrdersTabStyles.orderId}>{order.id}</Text>
-              <Text style={recentOrdersTabStyles.orderDate}>{order.date}</Text>
-            </View>
-            
-            <View style={recentOrdersTabStyles.orderBody}>
-              <View style={recentOrdersTabStyles.orderInfo}>
-                <Text style={recentOrdersTabStyles.customerName}>{order.customer}</Text>
-                <Text style={recentOrdersTabStyles.orderAmount}>{order.amount}</Text>
-              </View>
-              
-              <View style={[recentOrdersTabStyles.statusBadge, { backgroundColor: getStatusColor(order.status) + '20' }]}>
-                <Text style={[recentOrdersTabStyles.statusText, { color: getStatusColor(order.status) }]}>
-                  {order.status}
-                </Text>
-              </View>
-            </View>
+            <Text style={[
+              recentOrdersTabStyles.tabText,
+              activeTab === 'Customer' && recentOrdersTabStyles.activeTabText
+            ]}>
+              Customer
+            </Text>
           </TouchableOpacity>
-        ))}
-      </ScrollView>
+          
+          <TouchableOpacity
+            style={[
+              recentOrdersTabStyles.tab,
+              activeTab === 'Retailer' && recentOrdersTabStyles.activeTab
+            ]}
+            onPress={() => setActiveTab('Retailer')}
+          >
+            <Text style={[
+              recentOrdersTabStyles.tabText,
+              activeTab === 'Retailer' && recentOrdersTabStyles.activeTabText
+            ]}>
+              Retailer
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Orders Grid */}
+        <ScrollView 
+          style={recentOrdersTabStyles.ordersGrid} 
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={recentOrdersTabStyles.ordersGridContent}
+        >
+          {currentOrders.map((order, index) => (
+            <TouchableOpacity
+              key={`${order.id}-${index}`}
+              style={recentOrdersTabStyles.orderCard}
+              onPress={() => navigation.navigate('OrderDetail', { orderId: order.id })}
+            >
+              <Text style={recentOrdersTabStyles.orderLabel}>Id:</Text>
+              <Text style={recentOrdersTabStyles.orderId}>{order.id}</Text>
+              
+              <Text style={recentOrdersTabStyles.orderLabel}>Type:</Text>
+              <Text style={recentOrdersTabStyles.orderType}>{order.type}</Text>
+              
+              <Text style={recentOrdersTabStyles.orderLabel}>Date:</Text>
+              <Text style={recentOrdersTabStyles.orderDate}>{order.date}</Text>
+              
+              <Text style={recentOrdersTabStyles.orderLabel}>Status: </Text>
+              <Text style={[
+                recentOrdersTabStyles.orderStatus,
+                { color: getStatusColor(order.status) }
+              ]}>
+                {order.status}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
     </>
   );
