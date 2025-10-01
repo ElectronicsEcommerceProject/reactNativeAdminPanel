@@ -409,7 +409,7 @@ export const dashboardTabsStyles = StyleSheet.create({
     fontSize: width * 0.05,
   },
   label: {
-    fontSize: width * 0.027,
+    fontSize: width * 0.024,
     marginTop: '1%',
     color: '#999',
     fontWeight: '500',
