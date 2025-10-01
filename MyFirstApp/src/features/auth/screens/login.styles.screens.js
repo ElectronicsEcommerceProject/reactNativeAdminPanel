@@ -41,4 +41,14 @@ export const loginStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  inputError: {
+    borderColor: '#FF3B30',
+    borderWidth: 2,
+  },
+  errorText: {
+    color: '#FF3B30',
+    fontSize: 14,
+    marginBottom: 10,
+    alignSelf: 'flex-start',
+  },
 });
