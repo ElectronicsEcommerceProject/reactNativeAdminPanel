@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, StatusBar, Animated } from 'react-native';
+import { View, StatusBar, Animated } from 'react-native';
+import { splashScreenStyles } from './splashScreen.styles.screens';
 import AnimatedLogo from '../components/AnimatedLogo.components';
 import LoadingIndicator from '../components/LoadingIndicator.components';
 
@@ -27,23 +28,18 @@ const SplashScreen = ({ onFinish }) => {
 
   return (
     <Animated.View style={[
-      styles.container,
+      splashScreenStyles.container,
       { backgroundColor }
     ]}>
       <StatusBar backgroundColor="#007AFF" barStyle="light-content" />
-      <AnimatedLogo />
-      <LoadingIndicator />
+      <View style={splashScreenStyles.contentContainer}>
+        <AnimatedLogo />
+        <LoadingIndicator />
+      </View>
     </Animated.View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#007AFF', // this is now handled by animated style
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+
 
 export default SplashScreen;

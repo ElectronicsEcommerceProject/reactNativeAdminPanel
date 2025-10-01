@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { Animated, View, StyleSheet } from 'react-native';
+import { Animated, View } from 'react-native';
+import { loadingIndicatorStyles } from './LoadingIndicator.styles.components';
 
 const LoadingIndicator = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -22,10 +23,10 @@ const LoadingIndicator = () => {
   });
 
   return (
-    <View style={styles.container}>
+    <View style={loadingIndicatorStyles.container}>
       <Animated.View
         style={[
-          styles.spinner,
+          loadingIndicatorStyles.spinner,
           {
             transform: [{ rotate: spin }],
           },
@@ -35,18 +36,6 @@ const LoadingIndicator = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
-  },
-  spinner: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    borderWidth: 4,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-    borderTopColor: 'white',
-  },
-});
+
 
 export default LoadingIndicator;

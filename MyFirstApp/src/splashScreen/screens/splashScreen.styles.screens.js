@@ -1,3 +1,16 @@
-// Splash screen styling - full screen background, centered logo
-// Animation styles, gradient backgrounds, logo positioning
-// Loading spinner styles, version text styling
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
+
+export const splashScreenStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#007AFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
