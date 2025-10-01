@@ -31,7 +31,9 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
   profileIcon: {
-    fontSize: 40,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
   },
   adminText: {
     fontSize: 22,

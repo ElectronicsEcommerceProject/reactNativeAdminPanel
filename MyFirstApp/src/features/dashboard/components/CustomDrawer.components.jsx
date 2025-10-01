@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, Image } from 'react-native';
 import styles from './CustomDrawer.styles.components.js';
+import { logo } from '../../../assets/index.assets';
 
 const CustomDrawer = ({ visible, onClose, navigation }) => {
   const menuItems = [
@@ -42,7 +43,7 @@ const CustomDrawer = ({ visible, onClose, navigation }) => {
           {/* Header Section */}
           <View style={styles.header}>
             <View style={styles.profileIconContainer}>
-              <Text style={styles.profileIcon}>👤</Text>
+              <Image source={logo} style={styles.profileIcon} />
             </View>
             <Text style={styles.adminText}>Admin</Text>
           </View>
