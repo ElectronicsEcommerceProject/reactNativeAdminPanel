@@ -292,48 +292,76 @@ export const recentOrdersTabStyles = StyleSheet.create({
 export const lowStockTabStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#1E3A5F',
   },
-  header: {
+  topHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    padding: '5%',
-    paddingTop: '3%',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    justifyContent: 'space-between',
+    backgroundColor: '#1E3A5F',
+    paddingHorizontal: '4%',
+    paddingVertical: '3%',
+    paddingTop: '5%',
   },
-  menuButton: {
+  backButton: {
     width: width * 0.1,
     height: width * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: '3%',
   },
-  menuIcon: {
-    fontSize: width * 0.06,
-    color: '#333',
-  },
-  headerTextContainer: {
-    flex: 1,
-  },
-  headerTitle: {
-    fontSize: width * 0.06,
+  backIcon: {
+    fontSize: width * 0.07,
+    color: '#FFFFFF',
     fontWeight: 'bold',
-    color: '#333',
   },
-  headerSubtitle: {
+  topHeaderTitle: {
+    fontSize: width * 0.05,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    flex: 1,
+    textAlign: 'center',
+  },
+  addButton: {
+    width: width * 0.1,
+    height: width * 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addIcon: {
+    fontSize: width * 0.08,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: '4%',
+    marginVertical: '3%',
+    paddingHorizontal: '3%',
+    borderRadius: 25,
+    height: width * 0.12,
+  },
+  searchIcon: {
+    fontSize: width * 0.045,
+    marginRight: '2%',
+  },
+  searchInput: {
+    flex: 1,
     fontSize: width * 0.035,
-    color: '#F44336',
-    marginTop: '1%',
-    fontWeight: '500',
+    color: '#333',
   },
   productsList: {
     flex: 1,
+    backgroundColor: '#F5F5F5',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  productsListContent: {
     padding: '4%',
   },
   productCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#E8E8E8',
     borderRadius: 12,
     padding: '4%',
     marginBottom: '3%',
@@ -343,90 +371,67 @@ export const lowStockTabStyles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  productHeader: {
+  productCardContent: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: '3%',
   },
-  productInfo: {
+  productImageContainer: {
+    marginRight: '4%',
+  },
+  productImagePlaceholder: {
+    width: width * 0.2,
+    height: width * 0.25,
+    backgroundColor: '#D0D0D0',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  productImageIcon: {
+    fontSize: width * 0.08,
+  },
+  productDetails: {
     flex: 1,
+    justifyContent: 'center',
+  },
+  productLabel: {
+    fontSize: width * 0.035,
+    color: '#333',
+    fontWeight: '600',
+    marginTop: '1%',
   },
   productName: {
-    fontSize: width * 0.04,
-    fontWeight: 'bold',
+    fontSize: width * 0.038,
     color: '#333',
+    fontWeight: 'bold',
     marginBottom: '1%',
   },
-  productSku: {
+  productVariant: {
     fontSize: width * 0.032,
     color: '#666',
-    marginBottom: '0.5%',
+    marginBottom: '2%',
   },
-  productCategory: {
-    fontSize: width * 0.03,
-    color: '#999',
-  },
-  stockBadge: {
-    paddingHorizontal: '3%',
-    paddingVertical: '1.5%',
-    borderRadius: 20,
-  },
-  stockLevel: {
-    fontSize: width * 0.03,
-    fontWeight: 'bold',
-  },
-  stockInfo: {
-    marginBottom: '3%',
-  },
-  stockRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: '1.5%',
-  },
-  stockLabel: {
+  productStock: {
     fontSize: width * 0.035,
-    color: '#666',
-  },
-  stockValue: {
-    fontSize: width * 0.035,
-    fontWeight: '600',
     color: '#333',
+    fontWeight: '500',
+    marginBottom: '1%',
   },
-  progressBarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: '3%',
-  },
-  progressBarBackground: {
-    flex: 1,
-    height: 8,
-    backgroundColor: '#E0E0E0',
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginRight: '2%',
-  },
-  progressBarFill: {
-    height: '100%',
-    borderRadius: 4,
-  },
-  progressText: {
-    fontSize: width * 0.03,
-    fontWeight: '600',
-    color: '#666',
-    width: '10%',
-    textAlign: 'right',
-  },
-  reorderButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: '2.5%',
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  reorderButtonText: {
-    color: '#FFFFFF',
+  productRemaining: {
     fontSize: width * 0.035,
-    fontWeight: '600',
+    color: '#F44336',
+    fontWeight: 'bold',
+    marginBottom: '1%',
+  },
+  noResultsContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: '20%',
+  },
+  noResultsText: {
+    fontSize: width * 0.04,
+    color: '#666',
+    textAlign: 'center',
   },
 });
 

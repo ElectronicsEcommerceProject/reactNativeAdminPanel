@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Image } from 'react-native';
 import { COLORS } from '../../../config/colors.config';
 import { lowStockTabStyles } from './dashboard.styles.screens';
 import CustomDrawer from '../components/CustomDrawer.components';
 
 const LowStockTabScreen = ({ navigation }) => {
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  
   const [products] = useState([
-    { id: 1, name: 'Wireless Headphones', sku: 'WH-001', stock: 5, minStock: 20, category: 'Electronics' },
-    { id: 2, name: 'Smart Watch', sku: 'SW-002', stock: 3, minStock: 15, category: 'Electronics' },
-    { id: 3, name: 'Laptop Bag', sku: 'LB-003', stock: 8, minStock: 25, category: 'Accessories' },
-    { id: 4, name: 'USB Cable', sku: 'UC-004', stock: 12, minStock: 50, category: 'Accessories' },
-    { id: 5, name: 'Phone Case', sku: 'PC-005', stock: 7, minStock: 30, category: 'Accessories' },
-    { id: 6, name: 'Power Bank', sku: 'PB-006', stock: 4, minStock: 20, category: 'Electronics' },
-    { id: 7, name: 'Screen Protector', sku: 'SP-007', stock: 15, minStock: 40, category: 'Accessories' },
-    { id: 8, name: 'Bluetooth Speaker', sku: 'BS-008', stock: 2, minStock: 10, category: 'Electronics' },
+    { 
+      id: 1, 
+      name: '44W Flash Charge', 
+      variant: 'vivo, White Variant',
+      stock: 50, 
+      remaining: 2,
+      image: null
+    },
+    { 
+      id: 2, 
+      name: 'Wireless Headphones', 
+      variant: 'Sony, Black',
+      stock: 30, 
+      remaining: 5,
+      image: null
+    },
+    { 
+      id: 3, 
+      name: 'Smart Watch', 
+      variant: 'Samsung, Silver',
+      stock: 25, 
+      remaining: 3,
+      image: null
+    },
   ]);
 
   const getStockLevel = (stock, minStock) => {
@@ -23,6 +41,28 @@ const LowStockTabScreen = ({ navigation }) => {
     if (percentage <= 50) return { level: 'Low', color: '#FF9800' };
     return { level: 'Warning', color: '#FFC107' };
   };
+
+  // Filter products based on search query
+  const filterProducts = (products) => {
+    if (!searchQuery.trim()) {
+      return products;
+    }
+
+    const query = searchQuery.toLowerCase().trim();
+    
+    return products.filter((product) => {
+      const searchableText = [
+        product.name,
+        product.variant,
+        product.stock.toString(),
+        product.remaining.toString()
+      ].join(' ').toLowerCase();
+
+      return searchableText.includes(query);
+    });
+  };
+
+  const filteredProducts = filterProducts(products);
 
   return (
     <>
@@ -33,82 +73,77 @@ const LowStockTabScreen = ({ navigation }) => {
       />
       
       <View style={lowStockTabStyles.container}>
-        {/* Header */}
-        <View style={lowStockTabStyles.header}>
+        {/* Header with Back Button and Add Button */}
+        <View style={lowStockTabStyles.topHeader}>
           <TouchableOpacity 
-            style={lowStockTabStyles.menuButton}
-            onPress={() => setDrawerVisible(true)}
+            style={lowStockTabStyles.backButton}
+            onPress={() => navigation.goBack()}
           >
-            <Text style={lowStockTabStyles.menuIcon}>☰</Text>
+            <Text style={lowStockTabStyles.backIcon}>←</Text>
           </TouchableOpacity>
-          <View style={lowStockTabStyles.headerTextContainer}>
-            <Text style={lowStockTabStyles.headerTitle}>Low Stock Alert</Text>
-            <Text style={lowStockTabStyles.headerSubtitle}>{products.length} items need attention</Text>
-          </View>
+          <Text style={lowStockTabStyles.topHeaderTitle}>Low Stock Alert</Text>
+          <TouchableOpacity style={lowStockTabStyles.addButton}>
+            <Text style={lowStockTabStyles.addIcon}>⊕</Text>
+          </TouchableOpacity>
         </View>
 
-      {/* Products List */}
-      <ScrollView style={lowStockTabStyles.productsList} showsVerticalScrollIndicator={false}>
-        {products.map((product) => {
-          const stockInfo = getStockLevel(product.stock, product.minStock);
-          return (
-            <TouchableOpacity
-              key={product.id}
-              style={lowStockTabStyles.productCard}
-              onPress={() => navigation.navigate('ProductList')}
-            >
-              <View style={lowStockTabStyles.productHeader}>
-                <View style={lowStockTabStyles.productInfo}>
-                  <Text style={lowStockTabStyles.productName}>{product.name}</Text>
-                  <Text style={lowStockTabStyles.productSku}>SKU: {product.sku}</Text>
-                  <Text style={lowStockTabStyles.productCategory}>{product.category}</Text>
-                </View>
-                
-                <View style={[lowStockTabStyles.stockBadge, { backgroundColor: stockInfo.color + '20' }]}>
-                  <Text style={[lowStockTabStyles.stockLevel, { color: stockInfo.color }]}>
-                    {stockInfo.level}
-                  </Text>
-                </View>
-              </View>
-              
-              <View style={lowStockTabStyles.stockInfo}>
-                <View style={lowStockTabStyles.stockRow}>
-                  <Text style={lowStockTabStyles.stockLabel}>Current Stock:</Text>
-                  <Text style={[lowStockTabStyles.stockValue, { color: stockInfo.color }]}>
-                    {product.stock} units
-                  </Text>
-                </View>
-                <View style={lowStockTabStyles.stockRow}>
-                  <Text style={lowStockTabStyles.stockLabel}>Minimum Required:</Text>
-                  <Text style={lowStockTabStyles.stockValue}>{product.minStock} units</Text>
-                </View>
-              </View>
+        {/* Search Bar */}
+        <View style={lowStockTabStyles.searchContainer}>
+          <Text style={lowStockTabStyles.searchIcon}>🔍</Text>
+          <TextInput
+            style={lowStockTabStyles.searchInput}
+            placeholder="Search for recent Orders"
+            placeholderTextColor="#999"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        </View>
 
-              {/* Progress Bar */}
-              <View style={lowStockTabStyles.progressBarContainer}>
-                <View style={lowStockTabStyles.progressBarBackground}>
-                  <View 
-                    style={[
-                      lowStockTabStyles.progressBarFill, 
-                      { 
-                        width: `${Math.min((product.stock / product.minStock) * 100, 100)}%`,
-                        backgroundColor: stockInfo.color 
-                      }
-                    ]} 
-                  />
-                </View>
-                <Text style={lowStockTabStyles.progressText}>
-                  {Math.round((product.stock / product.minStock) * 100)}%
-                </Text>
-              </View>
+        {/* Products List */}
+        <ScrollView 
+          style={lowStockTabStyles.productsList} 
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={lowStockTabStyles.productsListContent}
+        >
+          {filteredProducts.length === 0 ? (
+            <View style={lowStockTabStyles.noResultsContainer}>
+              <Text style={lowStockTabStyles.noResultsText}>
+                No products found matching "{searchQuery}"
+              </Text>
+            </View>
+          ) : (
+            filteredProducts.map((product) => (
+              <TouchableOpacity
+                key={product.id}
+                style={lowStockTabStyles.productCard}
+                onPress={() => navigation.navigate('ProductList')}
+              >
+                <View style={lowStockTabStyles.productCardContent}>
+                  {/* Product Image Placeholder */}
+                  <View style={lowStockTabStyles.productImageContainer}>
+                    <View style={lowStockTabStyles.productImagePlaceholder}>
+                      <Text style={lowStockTabStyles.productImageIcon}>📦</Text>
+                    </View>
+                  </View>
 
-              <TouchableOpacity style={lowStockTabStyles.reorderButton}>
-                <Text style={lowStockTabStyles.reorderButtonText}>Reorder Now</Text>
+                  {/* Product Details */}
+                  <View style={lowStockTabStyles.productDetails}>
+                    <Text style={lowStockTabStyles.productLabel}>Product: </Text>
+                    <Text style={lowStockTabStyles.productName}>{product.name}</Text>
+                    
+                    <Text style={lowStockTabStyles.productVariant}>{product.variant}</Text>
+                    
+                    <Text style={lowStockTabStyles.productLabel}>Stock: </Text>
+                    <Text style={lowStockTabStyles.productStock}>{product.stock}</Text>
+                    
+                    <Text style={lowStockTabStyles.productLabel}>Remaining: </Text>
+                    <Text style={lowStockTabStyles.productRemaining}>{product.remaining}</Text>
+                  </View>
+                </View>
               </TouchableOpacity>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+            ))
+          )}
+        </ScrollView>
       </View>
     </>
   );
