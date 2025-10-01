@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
+import DocumentPicker from '@react-native-documents/picker';
 
 import { addEditBannerStyles } from './banners.styles.screens';
 
@@ -9,9 +10,19 @@ const AddEditBannerScreen = ({ navigation }) => {
   const [isActive, setIsActive] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const pickFile = () => {
-    // Simulate file selection
-    setSelectedFile({ name: 'selected-image.jpg' });
+  const pickFile = async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles],
+      });
+      setSelectedFile(res);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        // User cancelled the picker
+      } else {
+        throw err;
+      }
+    }
   };
 
   const onSubmit = (data) => {
