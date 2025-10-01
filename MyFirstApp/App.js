@@ -5,15 +5,21 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import SplashScreen from './src/splashScreen/screens/splashScreen.screens';
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const isDarkMode = useColorScheme() === 'dark';
+
+  if (showSplash) {
+    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
 
   return (
     <SafeAreaProvider>
