@@ -10,11 +10,17 @@ export const loginStyles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     padding: 20,
   },
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 30,
+    borderRadius: 60,
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#007AFF',
-    marginBottom: 40,
+    marginBottom: 30,
   },
   input: {
     width: '100%',

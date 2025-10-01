@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { loginStyles } from './login.styles.screens';
-import { login } from '../../../api/index.api';
+import { logo } from '../../../assets/index.assets';
 
 const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
@@ -16,9 +16,12 @@ const LoginScreen = ({ navigation }) => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const response = await login(data.email, data.password);
-      Alert.alert('Success', 'Login successful!');
-      // Navigate to dashboard
+      if (data.email === 'admin@gmail.com' && data.password === '123456') {
+        Alert.alert('Success', 'Login successful!');
+        navigation.navigate('Dashboard');
+      } else {
+        Alert.alert('Error', 'Invalid credentials. Use admin@gmail.com / 123456');
+      }
     } catch (error) {
       Alert.alert('Error', 'Login failed. Please try again.');
     } finally {
@@ -28,6 +31,11 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={loginStyles.container}>
+      <Image 
+        source={logo} 
+        style={loginStyles.logo}
+        resizeMode="contain"
+      />
       <Text style={loginStyles.title}>Admin Login</Text>
       
       <Controller
