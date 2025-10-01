@@ -15,9 +15,11 @@ ecommerce-admin-panel/
 │
 └── src/  // Aapke app ka saara main code is folder ke andar rehta hai.
     │
+    ├── index.src.js // Global exports for all src modules - Central import/export hub
     ├── App.src.jsx // MAIN APP COMPONENT - Navigation setup, Redux Provider, Theme Provider
     │
     ├── api/ // Backend server se communicate karne ka saara logic.
+    │   ├── index.api.js // Global exports for all API modules - Central import/export hub
     │   ├── axiosConfig.api.js // Base URL, headers, interceptors - baseURL: 'https://api.electronics.com'
     │   ├── auth.api.js // login(), logout(), refreshToken() - POST /auth/login
     │   ├── banner.api.js // getBanners(), createBanner(), deleteBanner() - home page banners
@@ -29,11 +31,13 @@ ecommerce-admin-panel/
     │   └── user.api.js // getUsers(), blockUser(), getUserDetails() - customer management
     │
     ├── assets/ // Static files - images, fonts, icons.
+    │   ├── index.assets.js // Global exports for all assets - Central import/export hub
     │   ├── fonts/ // Roboto-Regular.ttf, Poppins-Bold.ttf - custom fonts
     │   ├── icons/ // home.png, product.png, order.png - navigation icons
     │   └── images/ // logo.png, placeholder.jpg, banner-default.jpg
     │
     ├── components/ // Reusable UI components - har screen mein use hote hain.
+    │   ├── index.components.js // Global exports for all components - Central import/export hub
     │   ├── common/ // Basic UI elements jo har jagah use hote hain
     │   │   ├── AppButton.common.jsx // Custom button banane ka logic - different styles, colors, sizes
     │   │   │   // Isme button ka design, press effects, loading state ka logic hoga
@@ -57,11 +61,13 @@ ecommerce-admin-panel/
     │           // Keyboard avoiding, scroll behavior ka logic
     │
     ├── config/ // App ki global settings aur constants.
+    │   ├── index.config.js // Global exports for all config modules - Central import/export hub
     │   ├── colors.config.js // Color palette - PRIMARY: '#007AFF', SUCCESS: '#28A745'
     │   ├── constants.config.js // App constants - API_TIMEOUT: 10000, PAGE_SIZE: 20
     │   └── typography.config.js // Font sizes - HEADING: 24, BODY: 16, CAPTION: 12
     │
     ├── splashScreen/ // App startup screen - logo animation, loading.
+    │   ├── index.splashScreen.js // Global exports for splash screen modules - Central import/export hub
     │   ├── screens/
     │   │   ├── splashScreen.screens.jsx // Splash screen with app logo, loading animation
     │   │   └── splashScreen.styles.screens.js // Splash screen styling - full screen background, centered logo
@@ -74,6 +80,7 @@ ecommerce-admin-panel/
     │           // Custom loading animations, progress bar
     │
     ├── features/ // <<< APP KA MAIN LOGIC - Har feature independent module hai.
+    │   ├── index.features.js // Global exports for all feature modules - Central import/export hub
     │   │
     │   ├── auth/ // Login/Logout functionality.
     │   │   └── screens/
@@ -141,6 +148,7 @@ ecommerce-admin-panel/
     │           └── settings.screens.jsx // Admin profile, change password, app version
     │
     ├── hooks/ // Custom React hooks - reusable logic across components.
+    │   ├── index.hooks.js // Global exports for all custom hooks - Central import/export hub
     │   ├── useApi.hooks.js // API call management ka logic
     │   │   // API call karne, loading state manage karne ka logic
     │   │   // Error handling, retry mechanism, data caching ka logic
@@ -155,6 +163,7 @@ ecommerce-admin-panel/
     │       // Used in: Product search, User search, Order search
     │
     ├── navigation/ // App navigation structure - screen routing system.
+    │   ├── index.navigation.js // Global exports for all navigation modules - Central import/export hub
     │   ├── AppNavigator.navigation.jsx // Main navigation controller
     │   │   // Checks: if user logged in → MainDrawer, else → AuthStack
     │   │   // Contains: authentication logic, initial route decision
@@ -173,6 +182,7 @@ ecommerce-admin-panel/
     │       // Contains: user profile in header, logout option
     │
     ├── services/ // Background services - data persistence, tracking.
+    │   ├── index.services.js // Global exports for all service modules - Central import/export hub
     │   ├── analytics.services.js // User actions track karne ka logic
     │   │   // Events capture karne, analytics server pe send karne ka logic
     │   │   // User behavior data collect karne ka logic
@@ -183,6 +193,7 @@ ecommerce-admin-panel/
     │       // Data encryption/decryption ka logic
     │
     ├── store/ // Global state management - user data, app state.
+    │   ├── index.store.js // Global exports for all store modules - Central import/export hub
     │   ├── store.store.js // Redux store configuration - middleware, devtools
     │   └── features/ // State slices - each feature ka apna state.
     │       ├── auth.slice.features.js // Login state - user, token, isAuthenticated
