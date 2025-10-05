@@ -14,6 +14,7 @@ import { SplashScreen } from './src/splashScreen/index.splashScreen';
 import { LoginScreen, BannerListScreen } from './src/features/index.features';
 import DashboardScreen from './src/features/dashboard/screens/dashboard.screens';
 import AddEditBannerScreen from './src/features/banners/screens/addEditBanner.screens';
+import OrderListScreen from './src/features/orders/screens/orderList.screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,7 @@ function App() {
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="BannerList" component={BannerListScreen} />
           <Stack.Screen name="AddEditBanner" component={AddEditBannerScreen} />
+          <Stack.Screen name="OrderList" component={OrderListScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
