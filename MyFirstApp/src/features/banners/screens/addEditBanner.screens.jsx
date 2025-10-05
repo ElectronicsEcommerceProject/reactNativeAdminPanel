@@ -59,7 +59,7 @@ const AddEditBannerScreen = ({ navigation }) => {
   return (
     <View style={addEditBannerStyles.container}>
       <View style={addEditBannerStyles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={addEditBannerStyles.backButton} onPress={() => navigation.goBack()}>
           <Text style={{ fontSize: 18, color: '#007AFF' }}>←</Text>
         </TouchableOpacity>
         <Text style={addEditBannerStyles.headerTitle}>Banner Management</Text>

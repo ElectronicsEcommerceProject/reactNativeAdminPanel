@@ -231,8 +231,12 @@ export const addEditBannerStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    left: '5%',
   },
   headerTitle: {
     fontSize: width * 0.06,
