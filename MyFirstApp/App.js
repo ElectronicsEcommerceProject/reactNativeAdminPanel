@@ -11,10 +11,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SplashScreen } from './src/splashScreen/index.splashScreen';
-import { LoginScreen, BannerListScreen } from './src/features/index.features';
-import DashboardScreen from './src/features/dashboard/screens/dashboard.screens';
-import AddEditBannerScreen from './src/features/bannerManagement/screens/addEditBanner.screens';
-import OrderListScreen from './src/features/orders/screens/orderList.screens';
+import { 
+  LoginScreen, 
+  BannerListScreen, 
+  AddEditBannerScreen, 
+  DashboardScreen, 
+  OrderListScreen 
+} from './src/features/index.features';
 
 const Stack = createNativeStackNavigator();
 
