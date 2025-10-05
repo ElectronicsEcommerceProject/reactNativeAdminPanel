@@ -1,1 +1,0 @@
-// Font sizes - HEADING: 24, BODY: 16, CAPTION: 12
