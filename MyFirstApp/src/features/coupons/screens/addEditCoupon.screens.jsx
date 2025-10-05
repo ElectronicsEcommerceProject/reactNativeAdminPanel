@@ -1,1 +1,0 @@
-// Create 'DIWALI30' - 30% off, min ₹5000

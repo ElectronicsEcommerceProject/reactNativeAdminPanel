@@ -1,1 +1,0 @@
-// User tile - avatar, name, email, join date

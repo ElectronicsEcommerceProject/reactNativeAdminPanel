@@ -1,1 +1,0 @@
-// Product tile - image, name, price, stock

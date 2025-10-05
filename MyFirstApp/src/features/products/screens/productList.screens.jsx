@@ -1,1 +1,0 @@
-// All products list, search, filter by category
