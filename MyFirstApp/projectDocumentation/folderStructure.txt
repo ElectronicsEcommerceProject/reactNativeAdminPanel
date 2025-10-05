@@ -15,6 +15,7 @@ ecommerce-admin-panel/
 │
 └── src/  // Aapke app ka saara main code is folder ke andar rehta hai.
     │
+    ├── index.src.js // Global exports for all src modules - Central import/export hub
     ├── App.src.jsx // MAIN APP COMPONENT - Navigation setup, Redux Provider, Theme Provider
     │
     ├── shared/ // Shared resources across all features - common utilities
