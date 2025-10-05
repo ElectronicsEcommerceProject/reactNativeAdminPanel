@@ -13,7 +13,8 @@ const OrderListScreen = ({ navigation }) => {
   const [selectedUserType, setSelectedUserType] = useState('User Type');
 
   const statusOptions = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled', 'Returned'];
-  const userTypeOptions = ['All Users', 'Premium', 'Regular', 'Guest'];
+  const userTypeOptions = ['Customer', 'Retailer'];
+  const filterOptions = ['All', 'Retailer', 'Customer'];
 
   const orders = [
     { id: 'ORD-20250715-0302', name: 'Rohit Kumar', email: 'rohit3339@gmail.com', amount: '₹1800.00', date: '2025-07-15', status: 'Cancel' },
@@ -74,7 +75,7 @@ const OrderListScreen = ({ navigation }) => {
         </View>
 
         <View style={orderListStyles.filterContainer}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={orderListStyles.filterButton}
             onPress={() => setShowStatusDropdown(!showStatusDropdown)}
           >
@@ -82,7 +83,7 @@ const OrderListScreen = ({ navigation }) => {
             <Text style={orderListStyles.dropdownIcon}>▼</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={orderListStyles.filterButton}
             onPress={() => setShowDatePicker(true)}
           >
@@ -90,7 +91,7 @@ const OrderListScreen = ({ navigation }) => {
             <Text style={orderListStyles.dropdownIcon}>▼</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity 
+          <TouchableOpacity
             style={orderListStyles.filterButton}
             onPress={() => setShowUserTypeDropdown(!showUserTypeDropdown)}
           >
@@ -124,7 +125,7 @@ const OrderListScreen = ({ navigation }) => {
       </View>
 
       <Modal visible={showStatusDropdown} transparent animationType="fade">
-        <TouchableOpacity 
+        <TouchableOpacity
           style={orderListStyles.modalOverlay}
           onPress={() => setShowStatusDropdown(false)}
         >
@@ -146,7 +147,7 @@ const OrderListScreen = ({ navigation }) => {
       </Modal>
 
       <Modal visible={showUserTypeDropdown} transparent animationType="fade">
-        <TouchableOpacity 
+        <TouchableOpacity
           style={orderListStyles.modalOverlay}
           onPress={() => setShowUserTypeDropdown(false)}
         >

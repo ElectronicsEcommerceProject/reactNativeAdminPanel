@@ -215,4 +215,29 @@ export const orderListStyles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
   },
+  filterModal: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
+    minWidth: 200,
+    maxHeight: 300,
+    padding: 16,
+  },
+  filterOption: {
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+  filterOptionText: {
+    fontSize: 16,
+    color: '#000000',
+  },
+  clearButton: {
+    marginTop: 12,
+    alignItems: 'center',
+  },
+  clearButtonText: {
+    fontSize: 16,
+    color: '#FF3B30',
+    fontWeight: '600',
+  },
 });
