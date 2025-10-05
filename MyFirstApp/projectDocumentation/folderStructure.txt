@@ -1,317 +1,336 @@
-ecommerce-admin-panel/
+MyFirstApp/
+│
+├── __tests__/ // Test files
+│   └── App.test.tsx // App component tests
 │
 ├── android/ // Android build files - React Native automatically generates
 ├── ios/ // iOS build files - React Native automatically generates  
 ├── node_modules/ // Dependencies install hote hain yahan
+├── projectDocumentation/ // Project documentation
+│   └── folderStructure.txt // This file - complete folder structure
 │
 ├── .env // Environment variables - API_URL=https://api.mystore.com, JWT_SECRET=xyz123
 ├── .eslintrc.js // Code quality rules - semicolon, quotes, spacing ke rules
-├── .prettierrc // Code formatting - tab size, line length, bracket spacing
+├── .prettierrc.js // Code formatting - tab size, line length, bracket spacing
+├── .gitignore // Git ignore file
+├── .watchmanconfig // Watchman configuration
+├── App.js // Main App entry point
 ├── app.json // App metadata - name: "Electronics Admin", version: "1.0.0"
 ├── babel.config.js // JavaScript transpiler config - ES6 to ES5 conversion
+├── create-structure.bat // Batch file to create folder structure
+├── Gemfile // Ruby dependencies for iOS
 ├── index.js // React Native entry point - AppRegistry.registerComponent('App', () => App)
+├── jest.config.js // Jest testing configuration
 ├── metro.config.js // Bundler configuration - asset extensions, transformer options
-└── package.json // Dependencies list - react-native, redux, axios versions
+├── package.json // Dependencies list - react-native, redux, axios versions
+├── package-lock.json // Locked dependency versions
+└── README.md // Project readme file
 │
 └── src/  // Aapke app ka saara main code is folder ke andar rehta hai.
     │
-    ├── index.src.js // Global exports for all src modules - Central import/export hub
     ├── App.src.jsx // MAIN APP COMPONENT - Navigation setup, Redux Provider, Theme Provider
+    ├── index.src.js // Global exports for all src modules - Central import/export hub
     │
-    ├── shared/ // Shared resources across all features - common utilities
-    │   │
+    ├── assets/ // Static files - images, fonts, icons
+    │   ├── fonts/ // Custom fonts folder
+    │   ├── icons/ // App icons folder
+    │   ├── images/ // Images folder
+    │   │   └── logo.jpg // App logo
+    │   └── index.assets.js // Assets exports
+    │
+    ├── components/ // Reusable UI components (root level)
+    │   ├── common/ // Basic UI elements
+    │   │   ├── AppButton.common.jsx // Custom button component
+    │   │   ├── AppInput.common.jsx // Text input component
+    │   │   └── AppLoader.common.jsx // Loading spinner component
+    │   ├── layout/ // Layout components
+    │   │   ├── Header.layout.jsx // Header component
+    │   │   └── ScreenWrapper.layout.jsx // Screen wrapper component
+    │   └── index.components.js // Components exports
+    │
+    ├── hooks/ // Custom React hooks (root level)
+    │   ├── index.hooks.js // Hooks exports
+    │   ├── useApi.hooks.js // API hook
+    │   └── useDebounce.hooks.js // Debounce hook
+    │
+    ├── navigation/ // App navigation (root level)
+    │   ├── AppNavigator.navigation.jsx // Main navigator
+    │   ├── AuthStack.navigation.jsx // Auth stack
+    │   ├── index.navigation.js // Navigation exports
+    │   └── MainDrawer.navigation.jsx // Main drawer
+    │
+    ├── services/ // Services (root level)
+    │   ├── analytics.services.js // Analytics service
+    │   ├── index.services.js // Services exports
+    │   └── storage.services.js // Storage service
+    │
+    ├── shared/ // Shared resources across all features
     │   ├── api/ // Shared API configuration
-    │   │   └── axiosConfig.api.js // Base URL, headers, interceptors - baseURL: 'https://api.electronics.com'
+    │   │   └── axiosConfig.api.js // Axios config
     │   │
-    │   ├── assets/ // Static files - images, fonts, icons
-    │   │   ├── fonts/ // Roboto-Regular.ttf, Poppins-Bold.ttf - custom fonts
-    │   │   ├── icons/ // home.png, product.png, order.png - navigation icons
-    │   │   └── images/ // logo.png, placeholder.jpg, banner-default.jpg
+    │   ├── assets/ // Shared assets
+    │   │   ├── fonts/ // Shared fonts
+    │   │   ├── icons/ // Shared icons
+    │   │   └── images/ // Shared images
     │   │
-    │   ├── components/ // Reusable UI components - har screen mein use hote hain
-    │   │   ├── common/ // Basic UI elements jo har jagah use hote hain
-    │   │   │   ├── AppButton.common.jsx // Custom button - different styles, colors, sizes
-    │   │   │   ├── AppInput.common.jsx // Text input field - validation, error handling
-    │   │   │   └── AppLoader.common.jsx // Loading spinner dikhane ka logic
-    │   │   │
-    │   │   └── layout/ // Screen structure components
-    │   │       ├── Header.layout.jsx // Top navigation bar ka logic
-    │   │       └── ScreenWrapper.layout.jsx // Screen container wrapper ka logic
+    │   ├── components/ // Shared components
+    │   │   ├── common/ // Common components
+    │   │   │   ├── AppButton.common.jsx // Button
+    │   │   │   ├── AppInput.common.jsx // Input
+    │   │   │   └── AppLoader.common.jsx // Loader
+    │   │   └── layout/ // Layout components
+    │   │       ├── Header.layout.jsx // Header
+    │   │       └── ScreenWrapper.layout.jsx // Wrapper
     │   │
-    │   ├── config/ // App ki global settings aur constants
-    │   │   ├── colors.config.js // Color palette - PRIMARY: '#007AFF', SUCCESS: '#28A745'
-    │   │   ├── constants.config.js // App constants - API_TIMEOUT: 10000, PAGE_SIZE: 20
-    │   │   └── typography.config.js // Font sizes - HEADING: 24, BODY: 16, CAPTION: 12
+    │   ├── config/ // Shared configuration
+    │   │   ├── colors.config.js // Colors
+    │   │   ├── constants.config.js // Constants
+    │   │   └── typography.config.js // Typography
     │   │
-    │   ├── hooks/ // Custom React hooks - reusable logic across components
-    │   │   ├── useApi.hooks.js // API call management ka logic
-    │   │   └── useDebounce.hooks.js // Search input optimization ka logic
+    │   ├── hooks/ // Shared hooks
+    │   │   ├── useApi.hooks.js // API hook
+    │   │   └── useDebounce.hooks.js // Debounce hook
     │   │
-    │   ├── navigation/ // App navigation structure - screen routing system
-    │   │   ├── AppNavigator.navigation.jsx // Main navigation controller
-    │   │   ├── AuthStack.navigation.jsx // Authentication screens navigation
-    │   │   └── MainDrawer.navigation.jsx // Main app navigation (sidebar menu)
+    │   ├── navigation/ // Shared navigation
+    │   │   ├── AppNavigator.navigation.jsx // App navigator
+    │   │   ├── AuthStack.navigation.jsx // Auth stack
+    │   │   └── MainDrawer.navigation.jsx // Main drawer
     │   │
-    │   ├── store/ // Global Redux store configuration
-    │   │   └── store.store.js // Redux store setup - combines all feature slices
+    │   ├── services/ // Shared services
+    │   │   ├── analytics.services.js // Analytics
+    │   │   └── storage.services.js // Storage
     │   │
-    │   ├── services/ // Shared services across features
-    │   │   ├── analytics.services.js // User actions tracking, analytics
-    │   │   └── storage.services.js // Local storage - token, preferences
+    │   ├── store/ // Global Redux store
+    │   │   └── store.store.js // Store configuration
     │   │
-    │   └── utils/ // Helper functions - formatting, validation
-    │       ├── formatters.utils.js // formatPrice(1234) → '₹1,234', formatDate()
-    │       └── validators.utils.js // validateEmail(), validatePhone(), validateRequired()
+    │   └── utils/ // Utility functions
+    │       ├── formatters.utils.js // Formatters
+    │       └── validators.utils.js // Validators
+    │
+    ├── splashScreen/ // ========== SPLASH SCREEN MODULE ==========
+    │   ├── components/ // Splash screen components
+    │   │   ├── AnimatedLogo.components.jsx // Animated logo
+    │   │   ├── AnimatedLogo.styles.components.js // Logo styles
+    │   │   ├── LoadingIndicator.components.jsx // Loading indicator
+    │   │   └── LoadingIndicator.styles.components.js // Indicator styles
+    │   ├── screens/ // Splash screen
+    │   │   ├── splashScreen.screens.jsx // Splash screen
+    │   │   └── splashScreen.styles.screens.js // Splash styles
+    │   └── index.splashScreen.js // Splash exports
+    │
+    ├── store/ // Redux store (root level)
+    │   ├── features/ // Feature slices
+    │   │   ├── auth.slice.features.js // Auth slice
+    │   │   ├── order.slice.features.js // Order slice
+    │   │   ├── product.slice.features.js // Product slice
+    │   │   └── user.slice.features.js // User slice
+    │   ├── index.store.js // Store exports
+    │   └── store.store.js // Store configuration
+    │
+    ├── types/ // TypeScript types (root level)
+    │   ├── index.types.d.ts // Type definitions
+    │   ├── index.types.js // Type exports
+    │   ├── order.types.js // Order types
+    │   └── product.types.js // Product types
+    │
+    ├── utils/ // Utilities (root level)
+    │   ├── formatters.utils.js // Formatters
+    │   ├── index.utils.js // Utils exports
+    │   └── validators.utils.js // Validators
     │
     └── features/ // <<< MICROSERVICE ARCHITECTURE - Har feature apna independent module hai
         │
         ├── auth/ // ========== AUTHENTICATION MODULE ==========
         │   ├── api/ // Auth specific API calls
         │   │   └── auth.api.js // login(), logout(), refreshToken() - POST /auth/login
-        │   │
         │   ├── screens/ // Auth screens
         │   │   ├── login.screens.jsx // Email/password form, validation, API call
         │   │   └── login.styles.screens.js // Login screen ki styling
-        │   │
-        │   ├── services/ // Auth business logic
-        │   │   └── auth.services.js // Token management, session handling
-        │   │
-        │   ├── store/ // Auth state management
-        │   │   └── auth.slice.js // Login state - user, token, isAuthenticated
-        │   │
-        │   └── types/ // Auth data types
-        │       └── auth.types.js // User, LoginRequest, LoginResponse types
-        │
-        ├── dashboard/ // ========== DASHBOARD MODULE ==========
-        │   ├── api/ // Dashboard specific API calls
-        │   │   └── dashboard.api.js // getStats(), getSalesData(), getRecentOrders()
-        │   │
-        │   ├── screens/ // Dashboard screens
-        │   │   ├── dashboard.screens.jsx // Stats cards, charts, recent orders
-        │   │   └── dashboard.styles.screens.js // Dashboard layout styling
-        │   │
-        │   ├── components/ // Dashboard specific components
-        │   │   ├── StatCard.components.jsx // Statistics card banane ka logic
-        │   │   └── SalesChart.components.jsx // Sales chart banane ka logic
-        │   │
-        │   ├── services/ // Dashboard business logic
-        │   │   └── dashboard.services.js // Data processing, calculations
-        │   │
-        │   └── store/ // Dashboard state
-        │       └── dashboard.slice.js // Stats, charts data state
-        │
-        ├── productManagement/ // ========== PRODUCT MANAGEMENT MODULE ==========
-        │   ├── api/ // Product management specific API calls
-        │   │   └── product.api.js // getProducts(), addProduct(), updateProduct(), deleteProduct()
-        │   │
-        │   ├── screens/ // Product management screens
-        │   │   ├── productList.screens.jsx // All products list, search, filter
-        │   │   ├── productList.styles.screens.js // Product list styling
-        │   │   ├── addEditProduct.screens.jsx // Add/Edit product form
-        │   │   └── addEditProduct.styles.screens.js // Form styling
-        │   │
-        │   ├── components/ // Product specific components
-        │   │   └── productCard.components.jsx // Product tile - image, name, price, stock
-        │   │
-        │   ├── services/ // Product business logic
-        │   │   └── product.services.js // Price calculations, stock management
-        │   │
-        │   ├── store/ // Product state management
-        │   │   └── product.slice.js // Products list, selected product, loading
-        │   │
-        │   └── types/ // Product data types
-        │       └── product.types.js // Product shape - id, name, price, category, stock
-        │
-        ├── orderManagement/ // ========== ORDER MANAGEMENT MODULE ==========
-        │   ├── api/ // Order management specific API calls
-        │   │   └── order.api.js // getOrders(), updateOrderStatus(), getOrderDetails()
-        │   │
-        │   ├── screens/ // Order management screens
-        │   │   ├── orderList.screens.jsx // All orders, filter by status, date range
-        │   │   ├── orders.styles.screens.js // Order list styling
-        │   │   ├── orderDetail.screens.jsx // Order details, customer info, items
-        │   │   └── orderDetail.styles.screens.js // Order detail styling
-        │   │
-        │   ├── components/ // Order specific components
-        │   │   ├── orderCard.components.jsx // Order summary - ID, customer, total, status
-        │   │   └── orderStatusChip.components.jsx // Status badges - Pending, Shipped, Delivered
-        │   │
-        │   ├── services/ // Order business logic
-        │   │   └── order.services.js // Order calculations, status updates
-        │   │
-        │   ├── store/ // Order state management
-        │   │   └── order.slice.js // Orders list, order details, status updates
-        │   │
-        │   └── types/ // Order data types
-        │       └── order.types.js // Order shape - id, userId, items[], total, status
-        │
-        ├── userManagement/ // ========== USER MANAGEMENT MODULE ==========
-        │   ├── api/ // User management specific API calls
-        │   │   └── user.api.js // getUsers(), blockUser(), getUserDetails()
-        │   │
-        │   ├── screens/ // User management screens
-        │   │   ├── userList.screens.jsx // All customers, search by name/email
-        │   │   ├── userList.styles.screens.js // User list styling
-        │   │   ├── userDetail.screens.jsx // Customer profile, order history
-        │   │   └── userDetail.styles.screens.js // User detail styling
-        │   │
-        │   ├── components/ // User specific components
-        │   │   └── userCard.components.jsx // User tile - avatar, name, email, join date
-        │   │
-        │   ├── services/ // User business logic
-        │   │   └── user.services.js // User management, blocking logic
-        │   │
-        │   ├── store/ // User state management
-        │   │   └── user.slice.js // Users list, selected user, block/unblock
-        │   │
-        │   └── types/ // User data types
-        │       └── user.types.js // User shape - id, name, email, role, status
-        │
-        ├── stockManagement/ // ========== STOCK MANAGEMENT MODULE ==========
-        │   ├── api/ // Stock management specific API calls
-        │   │   └── stock.api.js // getStock(), updateStock(), getStockAlerts()
-        │   │
-        │   ├── screens/ // Stock management screens
-        │   │   ├── stockList.screens.jsx // All stock items, low stock alerts
-        │   │   ├── stockList.styles.screens.js // Stock list styling
-        │   │   ├── stockDetail.screens.jsx // Stock details, history
-        │   │   └── stockDetail.styles.screens.js // Stock detail styling
-        │   │
-        │   ├── components/ // Stock specific components
-        │   │   └── stockCard.components.jsx // Stock tile - product, quantity, status
-        │   │
-        │   ├── services/ // Stock business logic
-        │   │   └── stock.services.js // Stock calculations, alerts
-        │   │
-        │   ├── store/ // Stock state management
-        │   │   └── stock.slice.js // Stock list, alerts, updates
-        │   │
-        │   └── types/ // Stock data types
-        │       └── stock.types.js // Stock shape - productId, quantity, threshold
+        │   ├── services/ // Auth business logic (empty folder)
+        │   ├── store/ // Auth state management (empty folder)
+        │   └── types/ // Auth data types (empty folder)
         │
         ├── bannerManagement/ // ========== BANNER MANAGEMENT MODULE ==========
         │   ├── api/ // Banner management specific API calls
         │   │   └── banner.api.js // getBanners(), createBanner(), deleteBanner()
-        │   │
-        │   ├── screens/ // Banner management screens
-        │   │   ├── bannerList.screens.jsx // Active banners, create new, delete
-        │   │   ├── banners.styles.screens.js // Banner list & preview styling
-        │   │   └── addEditBanner.screens.jsx // Upload image, set link, schedule
-        │   │
         │   ├── components/ // Banner specific components
         │   │   └── bannerCard.components.jsx // Banner preview - image, title, status
-        │   │
         │   ├── navigation/ // Banner specific navigation
         │   │   └── BannerStack.navigation.jsx // Banner screens stack
-        │   │
+        │   ├── screens/ // Banner management screens
+        │   │   ├── addEditBanner.screens.jsx // Upload image, set link, schedule
+        │   │   ├── bannerList.screens.jsx // Active banners, create new, delete
+        │   │   └── banners.styles.screens.js // Banner list & preview styling
         │   ├── services/ // Banner business logic
         │   │   └── banner.services.js // Image upload, banner scheduling
-        │   │
         │   ├── store/ // Banner state management
         │   │   └── banner.slice.js // Banners list, selected banner
-        │   │
         │   └── types/ // Banner data types
         │       └── banner.types.js // Banner shape - id, image, title, link, active
         │
-        ├── reviewManagement/ // ========== REVIEW MANAGEMENT MODULE ==========
-        │   ├── api/ // Review management specific API calls
-        │   │   └── review.api.js // getReviews(), approveReview(), deleteReview()
-        │   │
-        │   ├── screens/ // Review management screens
-        │   │   ├── reviewList.screens.jsx // All reviews, pending, approved
-        │   │   ├── reviewList.styles.screens.js // Review list styling
-        │   │   ├── reviewDetail.screens.jsx // Review details, approve/reject
-        │   │   └── reviewDetail.styles.screens.js // Review detail styling
-        │   │
-        │   ├── components/ // Review specific components
-        │   │   └── reviewCard.components.jsx // Review tile - rating, comment, user
-        │   │
-        │   ├── services/ // Review business logic
-        │   │   └── review.services.js // Review moderation, filtering
-        │   │
-        │   ├── store/ // Review state management
-        │   │   └── review.slice.js // Reviews list, pending reviews
-        │   │
-        │   └── types/ // Review data types
-        │       └── review.types.js // Review shape - id, productId, rating, comment
+        ├── categories/ // ========== CATEGORIES MODULE ==========
+        │   ├── components/ // Category specific components
+        │   │   └── categoryCard.components.jsx // Category card component
+        │   └── screens/ // Category screens
+        │       ├── addEditCategory.screens.jsx // Add/Edit category form
+        │       └── categoryList.screens.jsx // All categories list
         │
         ├── couponsAndOffers/ // ========== COUPONS & OFFERS MODULE ==========
         │   ├── api/ // Coupons & offers specific API calls
         │   │   └── coupon.api.js // getCoupons(), createCoupon(), deleteCoupon()
-        │   │
-        │   ├── screens/ // Coupons & offers screens
-        │   │   ├── couponList.screens.jsx // All coupons, active/expired, usage stats
-        │   │   ├── couponList.styles.screens.js // Coupon list styling
-        │   │   ├── addEditCoupon.screens.jsx // Create coupon - code, discount, expiry
-        │   │   └── addEditCoupon.styles.screens.js // Form styling
-        │   │
         │   ├── components/ // Coupon specific components
         │   │   └── couponCard.components.jsx // Coupon tile - code, discount, expiry
-        │   │
+        │   ├── screens/ // Coupons & offers screens
+        │   │   ├── addEditCoupon.screens.jsx // Create coupon - code, discount, expiry
+        │   │   ├── addEditCoupon.styles.screens.js // Form styling
+        │   │   ├── couponList.screens.jsx // All coupons, active/expired, usage stats
+        │   │   └── couponList.styles.screens.js // Coupon list styling
         │   ├── services/ // Coupon business logic
         │   │   └── coupon.services.js // Discount calculations, validation
-        │   │
         │   ├── store/ // Coupon state management
         │   │   └── coupon.slice.js // Coupons list, selected coupon
-        │   │
         │   └── types/ // Coupon data types
         │       └── coupon.types.js // Coupon shape - code, discount, minAmount, expiry
+        │
+        ├── dashboard/ // ========== DASHBOARD MODULE ==========
+        │   ├── components/ // Dashboard specific components
+        │   │   ├── CustomDrawer.components.jsx // Custom drawer component
+        │   │   ├── CustomDrawer.styles.components.js // Drawer styling
+        │   │   ├── SalesChart.components.jsx // Sales chart banane ka logic
+        │   │   └── StatCard.components.jsx // Statistics card banane ka logic
+        │   ├── navigation/ // Dashboard navigation
+        │   │   └── DashboardTabs.navigation.jsx // Dashboard tabs navigation
+        │   └── screens/ // Dashboard screens
+        │       ├── dashboard.screens.jsx // Stats cards, charts, recent orders
+        │       ├── dashboard.styles.screens.js // Dashboard layout styling
+        │       ├── home.tab.screens.jsx // Home tab screen
+        │       ├── lowStock.tab.screens.jsx // Low stock tab screen
+        │       └── recentOrders.tab.screens.jsx // Recent orders tab screen
         │
         ├── notifications/ // ========== NOTIFICATIONS MODULE ==========
         │   ├── api/ // Notifications specific API calls
         │   │   └── notification.api.js // sendNotification(), getNotifications()
-        │   │
+        │   ├── components/ // Notification specific components
+        │   │   └── notificationCard.components.jsx // Notification tile
         │   ├── screens/ // Notification screens
         │   │   ├── notificationList.screens.jsx // All notifications
         │   │   ├── notificationList.styles.screens.js // Notification list styling
         │   │   ├── sendNotification.screens.jsx // Send push notification form
         │   │   └── sendNotification.styles.screens.js // Send notification styling
-        │   │
-        │   ├── components/ // Notification specific components
-        │   │   └── notificationCard.components.jsx // Notification tile
-        │   │
         │   ├── services/ // Notification business logic
         │   │   └── notification.services.js // Push notification handling
-        │   │
         │   └── store/ // Notification state
         │       └── notification.slice.js // Notifications list, unread count
+        │
+        ├── orderManagement/ // ========== ORDER MANAGEMENT MODULE ==========
+        │   ├── api/ // Order management specific API calls
+        │   │   └── order.api.js // getOrders(), updateOrderStatus(), getOrderDetails()
+        │   ├── components/ // Order specific components
+        │   │   ├── orderCard.components.jsx // Order summary - ID, customer, total, status
+        │   │   └── orderStatusChip.components.jsx // Status badges - Pending, Shipped, Delivered
+        │   ├── screens/ // Order management screens
+        │   │   ├── orderDetail.screens.jsx // Order details, customer info, items
+        │   │   ├── orderDetail.styles.screens.js // Order detail styling
+        │   │   ├── orderList.screens.jsx // All orders, filter by status, date range
+        │   │   └── orders.styles.screens.js // Order list styling
+        │   ├── services/ // Order business logic
+        │   │   └── order.services.js // Order calculations, status updates
+        │   ├── store/ // Order state management
+        │   │   └── order.slice.js // Orders list, order details, status updates
+        │   └── types/ // Order data types
+        │       └── order.types.js // Order shape - id, userId, items[], total, status
+        │
+        ├── productManagement/ // ========== PRODUCT MANAGEMENT MODULE ==========
+        │   ├── api/ // Product management specific API calls
+        │   │   └── product.api.js // getProducts(), addProduct(), updateProduct(), deleteProduct()
+        │   ├── components/ // Product specific components
+        │   │   └── productCard.components.jsx // Product tile - image, name, price, stock
+        │   ├── screens/ // Product management screens
+        │   │   ├── addEditProduct.screens.jsx // Add/Edit product form
+        │   │   ├── addEditProduct.styles.screens.js // Form styling
+        │   │   ├── productList.screens.jsx // All products list, search, filter
+        │   │   └── productList.styles.screens.js // Product list styling
+        │   ├── services/ // Product business logic
+        │   │   └── product.services.js // Price calculations, stock management
+        │   ├── store/ // Product state management
+        │   │   └── product.slice.js // Products list, selected product, loading
+        │   └── types/ // Product data types
+        │       └── product.types.js // Product shape - id, name, price, category, stock
         │
         ├── reportsAndAnalytics/ // ========== REPORTS & ANALYTICS MODULE ==========
         │   ├── api/ // Reports & analytics specific API calls
         │   │   └── reports.api.js // getSalesReport(), getAnalytics(), exportReport()
-        │   │
-        │   ├── screens/ // Reports & analytics screens
-        │   │   ├── reportsList.screens.jsx // All reports, sales, revenue
-        │   │   ├── reportsList.styles.screens.js // Reports list styling
-        │   │   ├── analyticsDetail.screens.jsx // Detailed analytics, charts
-        │   │   └── analyticsDetail.styles.screens.js // Analytics detail styling
-        │   │
         │   ├── components/ // Reports specific components
-        │   │   ├── reportCard.components.jsx // Report tile - type, date, data
-        │   │   └── analyticsChart.components.jsx // Charts for analytics
-        │   │
+        │   │   ├── analyticsChart.components.jsx // Charts for analytics
+        │   │   └── reportCard.components.jsx // Report tile - type, date, data
+        │   ├── screens/ // Reports & analytics screens
+        │   │   ├── analyticsDetail.screens.jsx // Detailed analytics, charts
+        │   │   ├── analyticsDetail.styles.screens.js // Analytics detail styling
+        │   │   ├── reportsList.screens.jsx // All reports, sales, revenue
+        │   │   └── reportsList.styles.screens.js // Reports list styling
         │   ├── services/ // Reports business logic
         │   │   └── reports.services.js // Report generation, data processing
-        │   │
         │   ├── store/ // Reports state management
         │   │   └── reports.slice.js // Reports list, analytics data
-        │   │
         │   └── types/ // Reports data types
         │       └── reports.types.js // Report shape - type, period, data
         │
-        └── settings/ // ========== SETTINGS MODULE ==========
-            ├── api/ // Settings specific API calls
-            │   └── settings.api.js // updateProfile(), changePassword()
-            │
-            ├── screens/ // Settings screens
-            │   ├── settings.screens.jsx // Admin profile, change password, app version
-            │   └── settings.styles.screens.js // Settings styling
-            │
-            ├── services/ // Settings business logic
-            │   └── settings.services.js // Profile update, password change logic
-            │
-            └── store/ // Settings state
-                └── settings.slice.js // App settings, preferences
+        ├── reviewManagement/ // ========== REVIEW MANAGEMENT MODULE ==========
+        │   ├── api/ // Review management specific API calls
+        │   │   └── review.api.js // getReviews(), approveReview(), deleteReview()
+        │   ├── components/ // Review specific components
+        │   │   └── reviewCard.components.jsx // Review tile - rating, comment, user
+        │   ├── screens/ // Review management screens
+        │   │   ├── reviewDetail.screens.jsx // Review details, approve/reject
+        │   │   ├── reviewDetail.styles.screens.js // Review detail styling
+        │   │   ├── reviewList.screens.jsx // All reviews, pending, approved
+        │   │   └── reviewList.styles.screens.js // Review list styling
+        │   ├── services/ // Review business logic
+        │   │   └── review.services.js // Review moderation, filtering
+        │   ├── store/ // Review state management
+        │   │   └── review.slice.js // Reviews list, pending reviews
+        │   └── types/ // Review data types
+        │       └── review.types.js // Review shape - id, productId, rating, comment
+        │
+        ├── settings/ // ========== SETTINGS MODULE ==========
+        │   └── screens/ // Settings screens
+        │       └── settings.screens.jsx // Admin profile, change password, app version
+        │
+        ├── stockManagement/ // ========== STOCK MANAGEMENT MODULE ==========
+        │   ├── api/ // Stock management specific API calls
+        │   │   └── stock.api.js // getStock(), updateStock(), getStockAlerts()
+        │   ├── components/ // Stock specific components
+        │   │   └── stockCard.components.jsx // Stock tile - product, quantity, status
+        │   ├── screens/ // Stock management screens
+        │   │   ├── stockDetail.screens.jsx // Stock details, history
+        │   │   ├── stockDetail.styles.screens.js // Stock detail styling
+        │   │   ├── stockList.screens.jsx // All stock items, low stock alerts
+        │   │   └── stockList.styles.screens.js // Stock list styling
+        │   ├── services/ // Stock business logic
+        │   │   └── stock.services.js // Stock calculations, alerts
+        │   ├── store/ // Stock state management
+        │   │   └── stock.slice.js // Stock list, alerts, updates
+        │   └── types/ // Stock data types
+        │       └── stock.types.js // Stock shape - productId, quantity, threshold
+        │
+        ├── userManagement/ // ========== USER MANAGEMENT MODULE ==========
+        │   ├── api/ // User management specific API calls
+        │   │   └── user.api.js // getUsers(), blockUser(), getUserDetails()
+        │   ├── components/ // User specific components
+        │   │   └── userCard.components.jsx // User tile - avatar, name, email, join date
+        │   ├── screens/ // User management screens
+        │   │   ├── userDetail.screens.jsx // Customer profile, order history
+        │   │   ├── userDetail.styles.screens.js // User detail styling
+        │   │   ├── userList.screens.jsx // All customers, search by name/email
+        │   │   └── userList.styles.screens.js // User list styling
+        │   ├── services/ // User business logic
+        │   │   └── user.services.js // User management, blocking logic
+        │   ├── store/ // User state management
+        │   │   └── user.slice.js // Users list, selected user, block/unblock
+        │   └── types/ // User data types
+        │       └── user.types.js // User shape - id, name, email, role, status
+        │
+        └── index.features.js // Global exports for all feature modules
 
 // ========== MICROSERVICE ARCHITECTURE BENEFITS ==========
 // 1. INDEPENDENT MODULES - Har feature apna complete package hai
