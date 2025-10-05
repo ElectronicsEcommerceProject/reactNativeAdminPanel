@@ -1,9 +1,54 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, FlatList, Modal } from 'react-native';
 import { orderStyles } from './orders.styles.screens';
 
 const OrderListScreen = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showStatusModal, setShowStatusModal] = useState(false);
+  const [showDateModal, setShowDateModal] = useState(false);
+  const [showUserTypeModal, setShowUserTypeModal] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState('Status');
+  const [selectedUserType, setSelectedUserType] = useState('User Type');
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const statusOptions = ['Processing', 'Shipped', 'Delivered', 'Cancelled', 'Returned'];
+  const userTypeOptions = ['Customer', 'Retailer'];
+
+  const handleStatusSelect = (status) => {
+    setSelectedStatus(status);
+    setShowStatusModal(false);
+  };
+
+  const handleUserTypeSelect = (type) => {
+    setSelectedUserType(type);
+    setShowUserTypeModal(false);
+  };
+
+  const generateCalendar = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const days = [];
+    
+    for (let i = 0; i < firstDay; i++) {
+      days.push(null);
+    }
+    for (let i = 1; i <= daysInMonth; i++) {
+      days.push(i);
+    }
+    return days;
+  };
+
+  const handleDateSelect = (day) => {
+    if (day) {
+      const today = new Date();
+      const selected = new Date(today.getFullYear(), today.getMonth(), day);
+      setSelectedDate(selected.toLocaleDateString());
+      setShowDateModal(false);
+    }
+  };
 
   const stats = [
     { number: '38', label: 'Total' },
@@ -123,16 +168,16 @@ const OrderListScreen = ({ navigation }) => {
         </View>
 
         <View style={orderStyles.filtersRow}>
-          <TouchableOpacity style={orderStyles.filterButton}>
-            <Text style={orderStyles.filterButtonText}>Status</Text>
+          <TouchableOpacity style={orderStyles.filterButton} onPress={() => setShowStatusModal(true)}>
+            <Text style={orderStyles.filterButtonText}>{selectedStatus}</Text>
             <Text style={orderStyles.filterIcon}>▼</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={orderStyles.filterButton}>
-            <Text style={orderStyles.filterButtonText}>Date</Text>
+          <TouchableOpacity style={orderStyles.filterButton} onPress={() => setShowDateModal(true)}>
+            <Text style={orderStyles.filterButtonText}>{selectedDate || 'Date'}</Text>
             <Text style={orderStyles.filterIcon}>▼</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={orderStyles.filterButton}>
-            <Text style={orderStyles.filterButtonText}>User Type</Text>
+          <TouchableOpacity style={orderStyles.filterButton} onPress={() => setShowUserTypeModal(true)}>
+            <Text style={orderStyles.filterButtonText}>{selectedUserType}</Text>
             <Text style={orderStyles.filterIcon}>▼</Text>
           </TouchableOpacity>
         </View>
@@ -145,6 +190,57 @@ const OrderListScreen = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
         />
       </View>
+
+      <Modal visible={showStatusModal} transparent animationType="fade" onRequestClose={() => setShowStatusModal(false)}>
+        <TouchableOpacity style={orderStyles.modalOverlay} activeOpacity={1} onPress={() => setShowStatusModal(false)}>
+          <View style={orderStyles.modalContent}>
+            <Text style={orderStyles.modalTitle}>Select Status</Text>
+            {statusOptions.map((status, index) => (
+              <TouchableOpacity key={index} style={orderStyles.modalOption} onPress={() => handleStatusSelect(status)}>
+                <Text style={orderStyles.modalOptionText}>{status}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      <Modal visible={showDateModal} transparent animationType="fade" onRequestClose={() => setShowDateModal(false)}>
+        <TouchableOpacity style={orderStyles.modalOverlay} activeOpacity={1} onPress={() => setShowDateModal(false)}>
+          <View style={orderStyles.calendarModal}>
+            <Text style={orderStyles.calendarTitle}>{new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</Text>
+            <View style={orderStyles.calendarWeekDays}>
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+                <Text key={index} style={orderStyles.weekDayText}>{day}</Text>
+              ))}
+            </View>
+            <View style={orderStyles.calendarDays}>
+              {generateCalendar().map((day, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[orderStyles.calendarDay, !day && orderStyles.emptyDay]}
+                  onPress={() => handleDateSelect(day)}
+                  disabled={!day}
+                >
+                  {day && <Text style={orderStyles.calendarDayText}>{day}</Text>}
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      <Modal visible={showUserTypeModal} transparent animationType="fade" onRequestClose={() => setShowUserTypeModal(false)}>
+        <TouchableOpacity style={orderStyles.modalOverlay} activeOpacity={1} onPress={() => setShowUserTypeModal(false)}>
+          <View style={orderStyles.modalContent}>
+            <Text style={orderStyles.modalTitle}>Select User Type</Text>
+            {userTypeOptions.map((type, index) => (
+              <TouchableOpacity key={index} style={orderStyles.modalOption} onPress={() => handleUserTypeSelect(type)}>
+                <Text style={orderStyles.modalOptionText}>{type}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
