@@ -1,1 +1,0 @@
-// Order #12345 details, customer info, items
