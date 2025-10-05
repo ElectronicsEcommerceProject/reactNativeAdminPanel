@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch, PermissionsAndroid, Platform, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import DocumentPicker from '@react-native-documents/picker';
 
@@ -10,7 +10,32 @@ const AddEditBannerScreen = ({ navigation }) => {
   const [isActive, setIsActive] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const requestPermissions = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.requestMultiple([
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        ]);
+        return (
+          granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
+          granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED
+        );
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
+    }
+    return true;
+  };
+
   const pickFile = async () => {
+    const hasPermission = await requestPermissions();
+    if (!hasPermission) {
+      Alert.alert('Permission Denied', 'Camera and storage permissions are required');
+      return;
+    }
+    
     try {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.allFiles],
