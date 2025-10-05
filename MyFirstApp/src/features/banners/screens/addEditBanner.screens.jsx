@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch, PermissionsAndroid, Platform, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
-import DocumentPicker from '@react-native-documents/picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 
 import { addEditBannerStyles } from './banners.styles.screens';
 
@@ -10,44 +10,23 @@ const AddEditBannerScreen = ({ navigation }) => {
   const [isActive, setIsActive] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const requestPermissions = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        const granted = await PermissionsAndroid.requestMultiple([
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        ]);
-        return (
-          granted['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED &&
-          granted['android.permission.READ_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED
-        );
-      } catch (err) {
-        console.warn(err);
-        return false;
-      }
-    }
-    return true;
-  };
+  const pickFile = () => {
+    const options = {
+      mediaType: 'photo',
+      includeBase64: false,
+      maxHeight: 2000,
+      maxWidth: 2000,
+    };
 
-  const pickFile = async () => {
-    const hasPermission = await requestPermissions();
-    if (!hasPermission) {
-      Alert.alert('Permission Denied', 'Camera and storage permissions are required');
-      return;
-    }
-    
-    try {
-      const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
-      });
-      setSelectedFile(res);
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        // User cancelled the picker
-      } else {
-        throw err;
+    launchImageLibrary(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        Alert.alert('Error', response.error);
+      } else if (response.assets && response.assets.length > 0) {
+        setSelectedFile(response.assets[0]);
       }
-    }
+    });
   };
 
   const onSubmit = (data) => {
@@ -170,7 +149,7 @@ const AddEditBannerScreen = ({ navigation }) => {
                 <Text style={{ color: 'white' }}>Choose File</Text>
               </TouchableOpacity>
               <Text style={{ alignSelf: 'center', color: '#666' }}>
-                {selectedFile ? selectedFile.name : 'No File Chosen'}
+                {selectedFile ? selectedFile.fileName || 'Image Selected' : 'No File Chosen'}
               </Text>
             </View>
             
