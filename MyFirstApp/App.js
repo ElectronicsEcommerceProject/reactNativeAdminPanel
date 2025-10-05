@@ -13,7 +13,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SplashScreen } from './src/splashScreen/index.splashScreen';
 import { LoginScreen, BannerListScreen } from './src/features/index.features';
 import DashboardScreen from './src/features/dashboard/screens/dashboard.screens';
-import AddEditBannerScreen from './src/features/banners/screens/addEditBanner.screens';
+import AddEditBannerScreen from './src/features/bannerManagement/screens/addEditBanner.screens';
 import OrderListScreen from './src/features/orders/screens/orderList.screens';
 
 const Stack = createNativeStackNavigator();
