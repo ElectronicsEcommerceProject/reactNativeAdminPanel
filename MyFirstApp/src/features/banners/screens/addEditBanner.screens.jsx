@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch, Alert, Modal, Image, StyleSheet } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import { launchImageLibrary } from 'react-native-image-picker';
+import LinearGradient from 'react-native-linear-gradient';
 
-import { addEditBannerStyles } from './banners.styles.screens';
+import { addEditBannerStyles, bannerPreviewStyles } from './banners.styles.screens';
 
 const AddEditBannerScreen = ({ navigation }) => {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors }, watch } = useForm();
   const [isActive, setIsActive] = useState(true);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
+  
+  const formData = watch();
 
   const pickFile = () => {
+    console.log('pickFile called');
     const options = {
       mediaType: 'photo',
       includeBase64: false,
@@ -19,11 +24,14 @@ const AddEditBannerScreen = ({ navigation }) => {
     };
 
     launchImageLibrary(options, (response) => {
+      console.log('Image picker response:', response);
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
+        console.log('Image picker error:', response.error);
         Alert.alert('Error', response.error);
       } else if (response.assets && response.assets.length > 0) {
+        console.log('Image selected:', response.assets[0]);
         setSelectedFile(response.assets[0]);
       }
     });
@@ -32,6 +40,20 @@ const AddEditBannerScreen = ({ navigation }) => {
   const onSubmit = (data) => {
     console.log({ ...data, isActive, file: selectedFile });
     navigation.goBack();
+  };
+
+  const gradientOptions = [
+    { label: 'Blue + Purple', value: 'Blue + Purple', colors: ['#667eea', '#764ba2'] },
+    { label: 'Pink + Orange', value: 'Pink + Orange', colors: ['#f093fb', '#f5576c'] },
+    { label: 'Green + Blue', value: 'Green + Blue', colors: ['#4facfe', '#00f2fe'] },
+    { label: 'Orange + Red', value: 'Orange + Red', colors: ['#fa709a', '#fee140'] },
+    { label: 'Purple + Pink', value: 'Purple + Pink', colors: ['#a8edea', '#fed6e3'] },
+    { label: 'Blue + Teal', value: 'Blue + Teal', colors: ['#30cfd0', '#330867'] },
+  ];
+
+  const getGradientColors = (style) => {
+    const gradient = gradientOptions.find(g => g.value === style);
+    return gradient ? gradient.colors : ['#667eea', '#764ba2'];
   };
 
   return (
@@ -131,24 +153,43 @@ const AddEditBannerScreen = ({ navigation }) => {
               control={control}
               name="backgroundStyle"
               render={({ field: { onChange, value } }) => (
-                <TextInput
-                  style={addEditBannerStyles.textInput}
-                  placeholder="Blue to Purple"
-                  value={value}
-                  onChangeText={onChange}
-                />
+                <View>
+                  <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginBottom: 15 }}>
+                    {gradientOptions.map((option) => (
+                      <TouchableOpacity
+                        key={option.value}
+                        onPress={() => onChange(option.value)}
+                        style={[
+                          bannerPreviewStyles.gradientOption,
+                          { borderColor: value === option.value ? '#007AFF' : '#ddd' }
+                        ]}
+                      >
+                        <LinearGradient
+                          colors={option.colors}
+                          style={bannerPreviewStyles.gradientOptionInner}
+                          start={{x: 0, y: 0}}
+                          end={{x: 1, y: 1}}
+                        >
+                          <Text style={bannerPreviewStyles.gradientOptionText}>
+                            {option.label}
+                          </Text>
+                        </LinearGradient>
+                      </TouchableOpacity>
+                    ))}
+                  </ScrollView>
+                </View>
               )}
             />
             
             <Text style={addEditBannerStyles.inputLabel}>Banner Image</Text>
-            <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+            <View style={bannerPreviewStyles.filePickerContainer}>
               <TouchableOpacity 
-                style={{ backgroundColor: '#007AFF', padding: 10, borderRadius: 5, marginRight: 10 }}
+                style={bannerPreviewStyles.filePickerButton}
                 onPress={pickFile}
               >
-                <Text style={{ color: 'white' }}>Choose File</Text>
+                <Text style={bannerPreviewStyles.filePickerButtonText}>Choose File</Text>
               </TouchableOpacity>
-              <Text style={{ alignSelf: 'center', color: '#666' }}>
+              <Text style={bannerPreviewStyles.filePickerText}>
                 {selectedFile ? selectedFile.fileName || 'Image Selected' : 'No File Chosen'}
               </Text>
             </View>
@@ -162,22 +203,103 @@ const AddEditBannerScreen = ({ navigation }) => {
             </View>
           </View>
           
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 20 }}>
+          <View style={bannerPreviewStyles.actionButtonsContainer}>
             <TouchableOpacity 
-              style={{ backgroundColor: '#007AFF', padding: 15, borderRadius: 5, flex: 1, marginRight: 10 }}
-              onPress={handleSubmit(onSubmit)}
+              style={bannerPreviewStyles.previewActionButton}
+              onPress={() => {
+                console.log('Preview button pressed');
+                setShowPreview(true);
+              }}
             >
-              <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Save</Text>
+              <Text style={bannerPreviewStyles.actionButtonText}>Preview Banner</Text>
             </TouchableOpacity>
             <TouchableOpacity 
-              style={{ backgroundColor: '#ccc', padding: 15, borderRadius: 5, flex: 1 }}
+              style={bannerPreviewStyles.saveActionButton}
+              onPress={handleSubmit(onSubmit)}
+            >
+              <Text style={bannerPreviewStyles.actionButtonText}>Save</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={bannerPreviewStyles.cancelActionButton}
               onPress={() => navigation.goBack()}
             >
-              <Text style={{ color: '#333', textAlign: 'center' }}>Cancel</Text>
+              <Text style={bannerPreviewStyles.cancelButtonText}>Cancel</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
+
+      <Modal
+        visible={showPreview}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowPreview(false)}
+      >
+        <View style={bannerPreviewStyles.modalOverlay}>
+          <View style={bannerPreviewStyles.modalContainer}>
+            <Text style={bannerPreviewStyles.modalTitle}>Banner Preview</Text>
+            
+            <LinearGradient
+              colors={getGradientColors(formData.backgroundStyle)}
+              style={bannerPreviewStyles.previewBanner}
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 1}}
+            >
+              {formData.discount && (
+                <View style={bannerPreviewStyles.discountBadgePreview}>
+                  <Text style={bannerPreviewStyles.discountTextPreview}>
+                    {formData.discount}
+                  </Text>
+                </View>
+              )}
+              
+              <View style={[
+                bannerPreviewStyles.previewTextContainer,
+                { paddingTop: formData.discount ? 25 : 0 }
+              ]}>
+                <Text style={bannerPreviewStyles.previewTitle}>
+                  {formData.title || 'Banner Title'}
+                </Text>
+                
+                <Text style={bannerPreviewStyles.previewDescription}>
+                  {formData.description || 'Banner Description'}
+                </Text>
+                
+                <Text style={bannerPreviewStyles.previewPrice}>
+                  {formData.price || 'Starting ₹1,999'}
+                </Text>
+                
+                <TouchableOpacity style={bannerPreviewStyles.previewButton}>
+                  <Text style={bannerPreviewStyles.previewButtonText}>
+                    {formData.buttonText || 'Shop Now'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              
+              {selectedFile ? (
+                <View style={bannerPreviewStyles.previewImageContainer}>
+                  <Image 
+                    source={{ uri: selectedFile.uri }} 
+                    style={bannerPreviewStyles.previewImage}
+                    resizeMode="cover"
+                  />
+                </View>
+              ) : (
+                <View style={bannerPreviewStyles.previewImagePlaceholder}>
+                  <Text style={bannerPreviewStyles.placeholderImageText}>No Image</Text>
+                </View>
+              )}
+            </LinearGradient>
+            
+            <TouchableOpacity 
+              style={bannerPreviewStyles.closeButton}
+              onPress={() => setShowPreview(false)}
+            >
+              <Text style={bannerPreviewStyles.closeButtonText}>Close Preview</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
