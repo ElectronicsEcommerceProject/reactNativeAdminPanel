@@ -157,7 +157,11 @@ const UserListScreen = ({ navigation }) => {
 
         <ScrollView style={userListStyles.usersList}>
           {users.map((user, index) => (
-            <View key={index} style={userListStyles.userCard}>
+            <TouchableOpacity 
+              key={index} 
+              style={userListStyles.userCard}
+              onPress={() => navigation.navigate('UserDetail', { user })}
+            >
               <View style={userListStyles.userHeader}>
                 <View>
                   <Text style={userListStyles.userName}>{user.name}</Text>
@@ -170,7 +174,7 @@ const UserListScreen = ({ navigation }) => {
                 <Text style={userListStyles.userAmount}>{user.amount}</Text>
                 <Text style={userListStyles.userStatus}>{user.status}</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>

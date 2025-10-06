@@ -18,7 +18,8 @@ import {
   DashboardScreen, 
   OrderListScreen,
   OrderDetailScreen,
-  UserListScreen
+  UserListScreen,
+  UserDetailScreen
 } from './src/features/index.features';
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,7 @@ function App() {
           <Stack.Screen name="OrderList" component={OrderListScreen} />
           <Stack.Screen name="OrderDetail" component={OrderDetailScreen} />
           <Stack.Screen name="UserList" component={UserListScreen} />
+          <Stack.Screen name="UserDetail" component={UserDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
