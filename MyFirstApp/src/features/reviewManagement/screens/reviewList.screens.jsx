@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Animated, Dimensions } from 'react-native';
 import { reviewListStyles } from './reviewList.styles.screens';
+
+const { width } = Dimensions.get('window');
 
 const ReviewListScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('All Reviews');
-  const [fadeAnim] = useState(new Animated.Value(1));
+  const [slideAnim] = useState(new Animated.Value(0));
 
   const handleTabChange = (tab) => {
-    Animated.sequence([
-      Animated.timing(fadeAnim, {
+    Animated.timing(slideAnim, {
+      toValue: -width,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
+      setActiveTab(tab);
+      slideAnim.setValue(width);
+      Animated.timing(slideAnim, {
         toValue: 0,
-        duration: 150,
+        duration: 200,
         useNativeDriver: true,
-      }),
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: 150,
-        useNativeDriver: true,
-      }),
-    ]).start();
-    setActiveTab(tab);
+      }).start();
+    });
   };
 
   const reviews = [
@@ -75,7 +77,7 @@ const ReviewListScreen = ({ navigation }) => {
   );
 
   const renderReviews = () => (
-    <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
+    <Animated.View style={{ flex: 1, transform: [{ translateX: slideAnim }] }}>
       <ScrollView style={reviewListStyles.reviewsList}>
       {reviews.map((review, index) => (
         <TouchableOpacity
