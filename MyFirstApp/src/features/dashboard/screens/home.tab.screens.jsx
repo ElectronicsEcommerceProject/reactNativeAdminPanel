@@ -17,7 +17,7 @@ const HomeTabScreen = ({ navigation }) => {
     { id: 3, title: 'Stock\nManagement', icon: '🏪', screen: 'ProductList' },
     { id: 4, title: 'User\nManagement', icon: '👤', screen: 'UserList' },
     { id: 5, title: 'Reports &\nAnalytics', icon: '📊', screen: 'Dashboard' },
-    { id: 6, title: 'Review\nManagement', icon: '⭐', screen: 'Dashboard' },
+    { id: 6, title: 'Review\nManagement', icon: '⭐', screen: 'ReviewList' },
   ];
 
   return (

@@ -16,3 +16,6 @@ export { OrderListScreen, OrderDetailScreen } from './orderManagement/index.orde
 
 // User Management
 export { UserListScreen, UserDetailScreen } from './userManagement/index.userManagement';
+
+// Review Management
+export { ReviewListScreen, ReviewDetailScreen } from './reviewManagement/index.reviewManagement';

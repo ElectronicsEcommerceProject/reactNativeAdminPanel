@@ -19,7 +19,9 @@ import {
   OrderListScreen,
   OrderDetailScreen,
   UserListScreen,
-  UserDetailScreen
+  UserDetailScreen,
+  ReviewListScreen,
+  ReviewDetailScreen
 } from './src/features/index.features';
 
 const Stack = createNativeStackNavigator();
@@ -45,6 +47,8 @@ function App() {
           <Stack.Screen name="OrderDetail" component={OrderDetailScreen} />
           <Stack.Screen name="UserList" component={UserListScreen} />
           <Stack.Screen name="UserDetail" component={UserDetailScreen} />
+          <Stack.Screen name="ReviewList" component={ReviewListScreen} />
+          <Stack.Screen name="ReviewDetail" component={ReviewDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
