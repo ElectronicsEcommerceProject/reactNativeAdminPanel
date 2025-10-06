@@ -208,26 +208,26 @@ const UserListScreen = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[userListStyles.tab, activeTab === 'Users' && userListStyles.activeTab]}
-          onPress={() => setActiveTab('Users')}
+          style={[userListStyles.tab, activeTab === 'User Management' && userListStyles.activeTab]}
+          onPress={() => setActiveTab('User Management')}
         >
-          <Text style={[userListStyles.tabText, activeTab === 'Users' && userListStyles.activeTabText]}>
-            Users
+          <Text style={[userListStyles.tabText, activeTab === 'User Management' && userListStyles.activeTabText]}>
+            User Management
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[userListStyles.tab, activeTab === 'Retailers' && userListStyles.activeTab]}
-          onPress={() => setActiveTab('Retailers')}
+          style={[userListStyles.tab, activeTab === 'Retailer Approval' && userListStyles.activeTab]}
+          onPress={() => setActiveTab('Retailer Approval')}
         >
-          <Text style={[userListStyles.tabText, activeTab === 'Retailers' && userListStyles.activeTabText]}>
-            Retailers
+          <Text style={[userListStyles.tabText, activeTab === 'Retailer Approval' && userListStyles.activeTabText]}>
+            Retailer Approval
           </Text>
         </TouchableOpacity>
       </View>
 
       {activeTab === 'Dashboard' && renderDashboard()}
-      {activeTab === 'Users' && renderUsers()}
-      {activeTab === 'Retailers' && renderRetailers()}
+      {activeTab === 'User Management' && renderUsers()}
+      {activeTab === 'Retailer Approval' && renderRetailers()}
 
       <Modal visible={showSortDropdown} transparent animationType="fade">
         <TouchableOpacity
