@@ -16,7 +16,8 @@ import {
   BannerListScreen, 
   AddEditBannerScreen, 
   DashboardScreen, 
-  OrderListScreen 
+  OrderListScreen,
+  OrderDetailScreen
 } from './src/features/index.features';
 
 const Stack = createNativeStackNavigator();
@@ -39,6 +40,7 @@ function App() {
           <Stack.Screen name="BannerList" component={BannerListScreen} />
           <Stack.Screen name="AddEditBanner" component={AddEditBannerScreen} />
           <Stack.Screen name="OrderList" component={OrderListScreen} />
+          <Stack.Screen name="OrderDetail" component={OrderDetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

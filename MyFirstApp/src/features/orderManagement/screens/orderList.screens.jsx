@@ -114,7 +114,10 @@ const OrderListScreen = ({ navigation }) => {
               <View style={orderListStyles.orderFooter}>
                 <Text style={orderListStyles.orderAmount}>{order.amount}</Text>
                 <Text style={orderListStyles.orderDate}>{order.date}</Text>
-                <TouchableOpacity style={orderListStyles.viewButton}>
+                <TouchableOpacity 
+                  style={orderListStyles.viewButton}
+                  onPress={() => navigation.navigate('OrderDetail', { orderId: order.id })}
+                >
                   <Text style={orderListStyles.viewIcon}>👁</Text>
                 </TouchableOpacity>
                 <Text style={orderListStyles.cancelText}>{order.status}</Text>

@@ -12,4 +12,4 @@ export { default as AddEditBannerScreen } from './bannerManagement/screens/addEd
 export { default as DashboardScreen } from './dashboard/screens/dashboard.screens';
 
 // Order Management
-export { default as OrderListScreen } from './orderManagement/screens/orderList.screens';
+export { OrderListScreen, OrderDetailScreen } from './orderManagement/index.orderManagement';
