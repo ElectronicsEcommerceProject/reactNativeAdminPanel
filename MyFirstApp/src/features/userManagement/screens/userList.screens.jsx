@@ -10,10 +10,15 @@ const UserListScreen = ({ navigation }) => {
   const [selectedSort, setSelectedSort] = useState('Date joined');
   const [selectedStatus, setSelectedStatus] = useState('Filter by status');
   const [selectedRole, setSelectedRole] = useState('Filter by role');
+  const [showRetailerDetail, setShowRetailerDetail] = useState(false);
+  const [selectedRetailer, setSelectedRetailer] = useState(null);
+  const [retailerStatus, setRetailerStatus] = useState('Active');
+  const [showRetailerStatusDropdown, setShowRetailerStatusDropdown] = useState(false);
 
   const sortOptions = ['Date joined', 'Order count', 'Revenue'];
   const statusOptions = ['Active', 'Inactive', 'Banned', 'Pending'];
   const roleOptions = ['Customer', 'Retailer'];
+  const retailerStatusOptions = ['Active', 'Inactive', 'Pending', 'Rejected'];
 
   const topBuyers = [
     { name: 'Gaurav Chaudhary', orders: 10, amount: '₹2,60,604.3' },
@@ -181,14 +186,142 @@ const UserListScreen = ({ navigation }) => {
     );
   };
 
-  const renderRetailers = () => (
-    <ScrollView style={userListStyles.content}>
-      <View style={userListStyles.statCard}>
-        <Text style={userListStyles.statLabel}>Total Retailers</Text>
-        <Text style={userListStyles.statValue}>8</Text>
+  const renderRetailers = () => {
+    const retailers = [
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', phone: 'N/A' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', phone: 'N/A' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', phone: 'N/A' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', phone: 'N/A' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', phone: 'N/A' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', phone: 'N/A' },
+    ];
+
+    return (
+      <View style={userListStyles.content}>
+        <View style={userListStyles.retailerStatsRow}>
+          <View style={userListStyles.retailerStatBox}>
+            <Text style={userListStyles.retailerStatLabel}>Total Requests</Text>
+            <Text style={userListStyles.retailerStatValue}>1</Text>
+          </View>
+          <View style={userListStyles.retailerStatBox}>
+            <Text style={userListStyles.retailerStatLabel}>Inactive</Text>
+            <Text style={userListStyles.retailerStatValue}>0</Text>
+          </View>
+          <View style={userListStyles.retailerStatBox}>
+            <Text style={userListStyles.retailerStatLabel}>Banned</Text>
+            <Text style={userListStyles.retailerStatValue}>0</Text>
+          </View>
+        </View>
+
+        <View style={userListStyles.searchBox}>
+          <Text style={userListStyles.searchIcon}>🔍</Text>
+          <Text style={userListStyles.searchPlaceholder}>Search by Name, Email</Text>
+        </View>
+
+        <ScrollView style={userListStyles.retailersList}>
+          {retailers.map((retailer, index) => (
+            <TouchableOpacity
+              key={index}
+              style={userListStyles.retailerCard}
+              onPress={() => {
+                setSelectedRetailer(retailer);
+                setShowRetailerDetail(true);
+              }}
+            >
+              <View style={userListStyles.retailerInfo}>
+                <Text style={userListStyles.retailerName}>{retailer.name}</Text>
+                <Text style={userListStyles.retailerEmail}>{retailer.email}</Text>
+                <Text style={userListStyles.retailerPhone}>{retailer.phone}</Text>
+              </View>
+              <View style={userListStyles.retailerActions}>
+                <TouchableOpacity style={userListStyles.verifyButton}>
+                  <Text style={userListStyles.verifyButtonText}>Verify</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={userListStyles.rejectButton}>
+                  <Text style={userListStyles.rejectButtonText}>Reject</Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        <Modal visible={showRetailerDetail} transparent animationType="slide">
+          <View style={userListStyles.modalContainer}>
+            <View style={userListStyles.retailerDetailModal}>
+              <View style={userListStyles.modalHeader}>
+                <Text style={userListStyles.modalTitle}>Retailer Information</Text>
+                <TouchableOpacity onPress={() => setShowRetailerDetail(false)}>
+                  <Text style={userListStyles.closeButton}>✕</Text>
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView style={userListStyles.modalContent}>
+                <View style={userListStyles.detailRow}>
+                  <Text style={userListStyles.detailIcon}>👤</Text>
+                  <Text style={userListStyles.detailText}>Pawan dubey</Text>
+                </View>
+                <View style={userListStyles.detailRow}>
+                  <Text style={userListStyles.detailIcon}>✉</Text>
+                  <Text style={userListStyles.detailText}>pawandubey@gmail.com</Text>
+                </View>
+                <View style={userListStyles.detailRow}>
+                  <Text style={userListStyles.detailIcon}>📞</Text>
+                  <Text style={userListStyles.detailText}>7870000909</Text>
+                </View>
+                <View style={userListStyles.detailRow}>
+                  <Text style={userListStyles.detailIcon}>📍</Text>
+                  <Text style={userListStyles.detailText}>SHL LMP Jharkhand, 800020</Text>
+                </View>
+                <View style={userListStyles.detailRow}>
+                  <Text style={userListStyles.detailIcon}>📅</Text>
+                  <Text style={userListStyles.detailText}>2025-2-24</Text>
+                </View>
+
+                <Text style={userListStyles.sectionLabel}>Change Retailers Status</Text>
+                <Text style={userListStyles.currentStatusLabel}>Current Status</Text>
+                <View style={userListStyles.statusRow}>
+                  <Text style={userListStyles.statusValue}>Active</Text>
+                  <TouchableOpacity 
+                    style={userListStyles.newStatusDropdown}
+                    onPress={() => setShowRetailerStatusDropdown(!showRetailerStatusDropdown)}
+                  >
+                    <Text style={userListStyles.newStatusText}>{retailerStatus}</Text>
+                    <Text style={userListStyles.dropdownArrow}>▼</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <Text style={userListStyles.sectionLabel}>Admin Notes</Text>
+                <View style={userListStyles.notesBox}>
+                  <Text style={userListStyles.notesPlaceholder}></Text>
+                </View>
+
+                <TouchableOpacity style={userListStyles.saveChangesButton}>
+                  <Text style={userListStyles.saveChangesText}>Save Changes</Text>
+                </TouchableOpacity>
+              </ScrollView>
+
+              {showRetailerStatusDropdown && (
+                <View style={userListStyles.statusDropdownMenu}>
+                  {retailerStatusOptions.map((status, idx) => (
+                    <TouchableOpacity
+                      key={idx}
+                      style={userListStyles.statusDropdownItem}
+                      onPress={() => {
+                        setRetailerStatus(status);
+                        setShowRetailerStatusDropdown(false);
+                      }}
+                    >
+                      <Text style={userListStyles.statusDropdownText}>{status}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
+            </View>
+          </View>
+        </Modal>
       </View>
-    </ScrollView>
-  );
+    );
+  };
 
   return (
     <View style={userListStyles.container}>
