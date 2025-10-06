@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { userListStyles } from './userList.styles.screens';
 
 const UserListScreen = ({ navigation }) => {
   const [activeTab, setActiveTab] = useState('Dashboard');
+  const [showSortDropdown, setShowSortDropdown] = useState(false);
+  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const [showRoleDropdown, setShowRoleDropdown] = useState(false);
+  const [selectedSort, setSelectedSort] = useState('Date joined');
+  const [selectedStatus, setSelectedStatus] = useState('Filter by status');
+  const [selectedRole, setSelectedRole] = useState('Filter by role');
+
+  const sortOptions = ['Date joined', 'Order count', 'Revenue'];
+  const statusOptions = ['Active', 'Inactive', 'Banned', 'Pending'];
+  const roleOptions = ['Customer', 'Retailer'];
 
   const topBuyers = [
     { name: 'Gaurav Chaudhary', orders: 10, amount: '₹2,60,604.3' },
@@ -105,14 +115,67 @@ const UserListScreen = ({ navigation }) => {
     </ScrollView>
   );
 
-  const renderUsers = () => (
-    <ScrollView style={userListStyles.content}>
-      <View style={userListStyles.statCard}>
-        <Text style={userListStyles.statLabel}>Total Users</Text>
-        <Text style={userListStyles.statValue}>23</Text>
+  const renderUsers = () => {
+    const users = [
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', orders: 0, amount: '₹1800.00', status: 'Active', role: 'Customer' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', orders: 0, amount: '₹1800.00', status: 'Active', role: 'Customer' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', orders: 0, amount: '₹1800.00', status: 'Active', role: 'Customer' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', orders: 0, amount: '₹1800.00', status: 'Active', role: 'Customer' },
+      { name: 'Rohit Kumar', email: 'rohit3339@gmail.com', orders: 0, amount: '₹1800.00', status: 'Active', role: 'Customer' },
+    ];
+
+    return (
+      <View style={userListStyles.content}>
+        <View style={userListStyles.filterRow}>
+          <TouchableOpacity 
+            style={userListStyles.filterDropdown}
+            onPress={() => setShowSortDropdown(!showSortDropdown)}
+          >
+            <Text style={userListStyles.filterText}>{selectedSort}</Text>
+            <Text style={userListStyles.dropdownArrow}>▼</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={userListStyles.filterDropdown}
+            onPress={() => setShowStatusDropdown(!showStatusDropdown)}
+          >
+            <Text style={userListStyles.filterText}>{selectedStatus}</Text>
+            <Text style={userListStyles.dropdownArrow}>▼</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={userListStyles.filterDropdown}
+            onPress={() => setShowRoleDropdown(!showRoleDropdown)}
+          >
+            <Text style={userListStyles.filterText}>{selectedRole}</Text>
+            <Text style={userListStyles.dropdownArrow}>▼</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={userListStyles.searchBox}>
+          <Text style={userListStyles.searchIcon}>🔍</Text>
+          <Text style={userListStyles.searchPlaceholder}>Search by Name, Email</Text>
+        </View>
+
+        <ScrollView style={userListStyles.usersList}>
+          {users.map((user, index) => (
+            <View key={index} style={userListStyles.userCard}>
+              <View style={userListStyles.userHeader}>
+                <View>
+                  <Text style={userListStyles.userName}>{user.name}</Text>
+                  <Text style={userListStyles.userEmail}>{user.email}</Text>
+                </View>
+                <Text style={userListStyles.userRole}>{user.role}</Text>
+              </View>
+              <View style={userListStyles.userFooter}>
+                <Text style={userListStyles.userOrders}>{user.orders} orders</Text>
+                <Text style={userListStyles.userAmount}>{user.amount}</Text>
+                <Text style={userListStyles.userStatus}>{user.status}</Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
       </View>
-    </ScrollView>
-  );
+    );
+  };
 
   const renderRetailers = () => (
     <ScrollView style={userListStyles.content}>
@@ -165,6 +228,72 @@ const UserListScreen = ({ navigation }) => {
       {activeTab === 'Dashboard' && renderDashboard()}
       {activeTab === 'Users' && renderUsers()}
       {activeTab === 'Retailers' && renderRetailers()}
+
+      <Modal visible={showSortDropdown} transparent animationType="fade">
+        <TouchableOpacity
+          style={userListStyles.modalOverlay}
+          onPress={() => setShowSortDropdown(false)}
+        >
+          <View style={userListStyles.dropdownMenu}>
+            {sortOptions.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={userListStyles.dropdownItem}
+                onPress={() => {
+                  setSelectedSort(option);
+                  setShowSortDropdown(false);
+                }}
+              >
+                <Text style={userListStyles.dropdownItemText}>{option}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      <Modal visible={showStatusDropdown} transparent animationType="fade">
+        <TouchableOpacity
+          style={userListStyles.modalOverlay}
+          onPress={() => setShowStatusDropdown(false)}
+        >
+          <View style={userListStyles.dropdownMenu}>
+            {statusOptions.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={userListStyles.dropdownItem}
+                onPress={() => {
+                  setSelectedStatus(option);
+                  setShowStatusDropdown(false);
+                }}
+              >
+                <Text style={userListStyles.dropdownItemText}>{option}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      <Modal visible={showRoleDropdown} transparent animationType="fade">
+        <TouchableOpacity
+          style={userListStyles.modalOverlay}
+          onPress={() => setShowRoleDropdown(false)}
+        >
+          <View style={userListStyles.dropdownMenu}>
+            {roleOptions.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={userListStyles.dropdownItem}
+                onPress={() => {
+                  setSelectedRole(option);
+                  setShowRoleDropdown(false);
+                }}
+              >
+                <Text style={userListStyles.dropdownItemText}>{option}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };

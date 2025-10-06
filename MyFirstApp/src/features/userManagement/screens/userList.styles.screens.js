@@ -130,4 +130,118 @@ export const userListStyles = StyleSheet.create({
     fontWeight: '600',
     color: '#4CAF50',
   },
+  filterRow: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    gap: 8,
+  },
+  filterDropdown: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  filterText: {
+    fontSize: 11,
+    color: '#666',
+  },
+  dropdownArrow: {
+    fontSize: 10,
+    color: '#666',
+  },
+  searchBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    marginTop: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  searchIcon: {
+    fontSize: 16,
+    marginRight: 8,
+  },
+  searchPlaceholder: {
+    fontSize: 14,
+    color: '#999',
+  },
+  usersList: {
+    flex: 1,
+    marginTop: 12,
+  },
+  userCard: {
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    marginBottom: 12,
+    padding: 16,
+    borderRadius: 8,
+  },
+  userHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+  },
+  userName: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: '#333',
+    marginBottom: 4,
+  },
+  userEmail: {
+    fontSize: 13,
+    color: '#666',
+  },
+  userRole: {
+    fontSize: 13,
+    color: '#666',
+  },
+  userFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  userOrders: {
+    fontSize: 12,
+    color: '#999',
+  },
+  userAmount: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333',
+  },
+  userStatus: {
+    fontSize: 13,
+    color: '#4CAF50',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dropdownMenu: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 8,
+    minWidth: 150,
+  },
+  dropdownItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  dropdownItemText: {
+    fontSize: 14,
+    color: '#333',
+  },
 });
