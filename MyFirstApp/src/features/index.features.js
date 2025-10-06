@@ -13,3 +13,6 @@ export { default as DashboardScreen } from './dashboard/screens/dashboard.screen
 
 // Order Management
 export { OrderListScreen, OrderDetailScreen } from './orderManagement/index.orderManagement';
+
+// User Management
+export { UserListScreen } from './userManagement/index.userManagement';
